@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sapphire</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    /* Landing Page Styles */
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background-color: #0F1C48;
+      color: #FF914D;
+    }
+    
+    .centered-header {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+    }
+
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .logo {
+      width: 130px;
+      height: auto;
+      vertical-align: bottom;
+      margin-right: 0.5rem;
+    }
+    
+    .site-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin: 0.5rem 0 0;
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .blue-text {
+      color: #4B5D9B;
+    }
+    
+    .orange-text {
+      color: #FF6B1A;
+    }
+    
+    .hero {
+      background-color: #0F1C48;
+      color: #FF914D;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+    
+    .tagline {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .description {
+      max-width: 600px;
+      margin: 0.5rem auto 1rem;
+      font-size: 1.1rem;
+    }
+    
+    .explore-button {
+      background-color: #FF914D;
+      color: #0F1C48;
+      font-weight: bold;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 1rem;
+      transition: background-color 0.3s ease;
+    }
+    
+    .explore-button:hover {
+      background-color: #e5782f;
+    }
+    
+    .footer {
+      background-color: #0F1C48;
+      padding: 1.5rem;
+      text-align: center;
+      color: #ffffff;
+    }
+    
+    .social-links a {
+      color: #FF914D;
+      margin: 0 1rem;
+      text-decoration: none;
+    }
+
+    /* Home Page Content Styles (initially hidden) */
+    .home-content {
+      display: none;
+    }
+    
+    nav {
+      background-color: #192d66;
+      padding: 1rem 0;
+    }
+    
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .nav-links li {
+      margin: 0 1.5rem;
+    }
+    
+    .nav-links a {
+      color: #FF914D;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .nav-links a:hover {
+      color: #e5782f;
+    }
+
+    .section {
+      padding: 4rem 2rem;
+      margin: 0 auto;
+      max-width: 1200px;
+    }
+    
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      color: #FF914D;
+    }
+    
+    /* Team Section */
+    .team-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+    
+    .team-member {
+      background-color: #192d66;
+      border-radius: 10px;
+      padding: 1.5rem;
+      width: 300px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    
+    .team-member:hover {
+      transform: translateY(-10px);
+    }
+    
+    .member-name {
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .member-role {
+      color: #FF6B1A;
+      font-weight: 600;
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+    
+    .member-details {
+      text-align: left;
+      margin-top: 1rem;
+    }
+    
+    .member-details ul {
+      padding-left: 1.2rem;
+      margin: 0;
+    }
+    
+    .member-details li {
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+    
+    /* Vision & Mission Section */
+    .vision-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    
+    .vision-box, .mission-box, .calestia-box {
+      background-color: #192d66;
+      border-radius: 10px;
+      padding: 2rem;
+    }
+    
+    .box-title {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: #FF914D;
+    }
+    
+    .philosophy {
+      font-style: italic;
+      font-size: 1.3rem;
+      margin: 2rem 0;
+      text-align: center;
+      color: #FF6B1A;
+    }
+    
+    /* Projects Section */
+    .projects-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      width: 100%;
+    }
+    
+    .project-card {
+      background-color: #192d66;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .project-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background-color: #4B5D9B;
+    }
+    
+    .project-details {
+      padding: 1.5rem;
+    }
+    
+    .project-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #FF914D;
+    }
+    
+    .project-description {
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    
+    .project-contributors {
+      font-style: italic;
+      font-size: 0.9rem;
+      color: #c9d8ff;
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      background-color: #FF914D;
+      color: #0F1C48;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      cursor: pointer;
+      display: none;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    /* Return to Landing Button */
+    .return-button {
+      background-color: #4B5D9B;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    /* Calestia Section */
+    .calestia-section {
+      margin-top: 2rem;
+    }
+    
+    .calestia-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .calestia-highlight {
+      font-weight: 600;
+      color: #FF6B1A;
+    }
+
+    /* Contact Section Styles */
+    .contact-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .contact-info {
+      background-color: #192d66;
+      border-radius: 10px;
+      padding: 2rem;
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+
+    .contact-form {
+      background-color: #192d66;
+      border-radius: 10px;
+      padding: 2rem;
+      width: 100%;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 2px solid #4B5D9B;
+      border-radius: 5px;
+      background-color: #0F1C48;
+      color: #FF914D;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .submit-button {
+      background-color: #FF914D;
+      color: #0F1C48;
+      font-weight: bold;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-button:hover {
+      background-color: #e5782f;
+    }
+
+    .contact-methods {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-top: 1.5rem;
+    }
+
+    .contact-method {
+      text-align: center;
+      margin-bottom: 1rem;
+      flex: 1;
+      min-width: 150px;
+    }
+
+    .contact-method i {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #FF914D;
+    }
+
+    .contact-method a {
+      color: #FF914D;
+      text-decoration: none;
+    }
+
+    .contact-method a:hover {
+      color: #e5782f;
+    }
+
+    /* Social Links Styles */
+    .social-links {
+      margin: 1rem 0;
+    }
+    
+    .social-links a {
+      display: inline-block;
+      margin: 0 0.8rem;
+      color: #FF914D;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      color: #e5782f;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .vision-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .nav-links {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .nav-links li {
+        margin: 0.5rem 0;
+      }
+
+      .contact-methods {
+        flex-direction: column;
+      }
+
+      .contact-method {
+        margin-bottom: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Landing Page Content -->
+  <div id="landing-page">
+    <header class="centered-header">
+      <div class="logo-container">
+        <img src="sapphire-logo.png" alt="Sapphire Logo" class="logo">
+        <h1 class="site-title">
+          <span class="blue-text">Sapp</span><span class="orange-text">hire</span>
+        </h1>
+      </div>
+    </header>
+
+    <section class="hero">
+      <h2 class="tagline">Out-grow; Beyond, Incomprehensible to others.</h2>
+      <p class="description">
+        A movement of innovators, learners, and creators. Built from spark, strengthened by will.
+      </p>
+      <button class="explore-button" id="begin-journey">Begin the Journey</button>
+    </section>
+
+    <footer class="footer">
+      <div class="social-links">
+        <a href="https://github.com/Shards-Of-Sapphire">GitHub</a>
+        <a href="http://www.youtube.com/@shards-of-sapphire">YouTube</a>
+        <a href="https://www.instagram.com/sapphire.official.ig/">Instagram</a>
+        <a href="https://www.linkedin.com/in/sapphire-team-b1b2b5360?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3Bq%2B7zhQkmTkuofsQwwu8BMg%3D%3D">LinkedIn</a>
+      </div>
+      <p>© <span id="year">2025</span> Sapphire. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <!-- Home Page Content (initially hidden) -->
+  <div id="home-page" class="home-content">
+    <header class="centered-header">
+      <div class="logo-container">
+        <img src="sapphire-logo.png" alt="Sapphire Logo" class="logo">
+        <h1 class="site-title">
+          <span class="blue-text">Sapp</span><span class="orange-text">hire</span>
+        </h1>
+      </div>
+    </header>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#team">Team</a></li>
+        <li><a href="#vision">Vision & Mission</a></li>
+        <li><a href="#calestia">Calestia</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#" id="return-to-landing">Home</a></li>
+      </ul>
+    </nav>
+
+    <!-- Team Section -->
+    <section id="team" class="section">
+      <h2 class="section-title">Our Team</h2>
+      <div class="team-container">
+        <div class="team-member">
+          <h3 class="member-name">Roushna Khatoon</h3>
+          <p class="member-role">Team Leader, Visionary, Creative Lead</p>
+          <div class="member-details">
+            <ul>
+              <li>Leads the group with enthusiasm and positive energy</li>
+              <li>Coordinates projects and team activities</li>
+              <li>Strong in storytelling, design, and overall creative direction</li>
+              <li>Co-founder of Sapphire's long-term vision</li>
+              <li>Works across LegalEase, MindQuest, and game development projects</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <h3 class="member-name">Shaik Zayed Saleem</h3>
+          <p class="member-role">Co-Visionary, Tech Strategist, Game Developer</p>
+          <div class="member-details">
+            <ul>
+              <li>Deep thinker and long-term planner alongside Roushna</li>
+              <li>Leads logic-heavy tasks and mathematical problem-solving</li>
+              <li>Co-leads game development efforts (Python → PyGame → Godot roadmap)</li>
+              <li>Avoids corporate; wants to build Sapphire as a lifelong mission</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <h3 class="member-name">Mohammed Shoaib Khan</h3>
+          <p class="member-role">Core Developer, Backend & Logic Specialist</p>
+          <div class="member-details">
+            <ul>
+              <li>Silent achiever, delivers strong code under the radar</li>
+              <li>Provided the base code for the Snake game</li>
+              <li>Crucial in building stable, functional apps (LegalEase, etc.)</li>
+              <li>Trusted for responsibility and reliability</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <h3 class="member-name">Aayat Nizam</h3>
+          <p class="member-role">Concept Spark, Productivity Driver, Design Support</p>
+          <div class="member-details">
+            <ul>
+              <li>Quiet but powerful; ideator behind MindQuest</li>
+              <li>Brings aesthetic ideas and emotional depth to projects</li>
+              <li>Very focused and dependable in completing tasks on time</li>
+              <li>Adds spark and balance to team dynamics</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <h3 class="member-name">Syed Mohammed Ayaan</h3>
+          <p class="member-role">Coordination & Communication Head</p>
+          <div class="member-details">
+            <ul>
+              <li>Manages WhatsApp group and team coordination</li>
+              <li>Keeps the group connected during hackathons and high-pressure times</li>
+              <li>Supports event planning, submissions, and team logistics</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <h3 class="member-name">Afnan Ahmed Khan</h3>
+          <p class="member-role">Cross-Sectional Integrator, Research & QA</p>
+          <div class="member-details">
+            <ul>
+              <li>Only member from a different section—brings fresh perspectives</li>
+              <li>Supports in research, idea validation, and refining details</li>
+              <li>Adds variety and helps balance group thought processes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vision & Mission Section -->
+    <section id="vision" class="section">
+      <h2 class="section-title">Vision & Mission</h2>
+      <div class="philosophy">
+        "Out-grow; Beyond, Incomprehensible to others."
+      </div>
+      <div class="vision-container">
+        <div class="vision-box">
+          <h3 class="box-title">Vision</h3>
+          <p>To grow beyond college and create a meaningful venture in tech, education, or multi-domain creative projects, avoiding traditional corporate routes.</p>
+          <p>Sapphire aims to develop a strong identity through hackathons, workshops, and events, while maintaining authenticity, unity, and a close-knit culture.</p>
+        </div>
+        <div class="mission-box">
+          <h3 class="box-title">Team Goal</h3>
+          <p>Build a portfolio of impactful projects, such as <em>LegalEase</em>, and create opportunities for each member to contribute based on their strengths and grow together.</p>
+          <p>We value authenticity, creativity, and the unique talents each member brings to our collective journey.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calestia Section -->
+    <section id="calestia" class="section calestia-section">
+      <h2 class="section-title">Calestia</h2>
+      <div class="calestia-container">
+        <div class="calestia-box">
+          <h3 class="box-title">The Experimental Wing of Sapphire</h3>
+          <p><strong>Calestia</strong> is a handpicked trio within Sapphire, formed under a workshop assignment from the Head of the Department. It's a space where innovation, speed, and deep collaboration come together to deliver high-quality technical projects in short timelines.</p>
+          <p>This experimental wing serves as Sapphire's specialized task force, tackling challenging projects that require focused expertise and rapid development. The team combines complementary skills to create solutions that exemplify Sapphire's commitment to excellence.</p>
+          <p>Currently, Calestia is spearheading the development of <em>LegalEase</em>, our flagship project for automating legal document summarization and text simplification.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+      <h2 class="section-title">Our Projects</h2>
+      <div class="projects-container">
+        <div class="project-card">
+          <img src="legal ease-logo.jpg" alt="LegalEase Project" class="project-image">
+          <div class="project-details">
+            <h3 class="project-title">LegalEase</h3>
+            <p class="project-description">
+              A project for automating legal document summarization and text simplification, being developed under the subgroup <em>Calestia</em>.
+            </p>
+            <p class="project-contributors">Team Calestia</p>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <img src="Guardian Angel-logo.jpg" alt="Guardian Angel Project" class="project-image">
+          <div class="project-details">
+            <h3 class="project-title">Guardian Angel</h3>
+            <p class="project-description">
+              A road safety device using ML, DL, and IoT to prevent accidents by detecting overloading, reckless driving, and obstacles. Enforces safety protocols and adjusts vehicle behavior in real-time for safer driving.
+            </p>
+            <p class="project-contributors">SIH Project</p>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <img src="skillsphere-logo.jpg" alt="Skill Sphere Project" class="project-image">
+          <div class="project-details">
+            <h3 class="project-title">Skill Sphere</h3>
+            <p class="project-description">
+              An AI-powered platform helping students discover strengths, learn through gamified quests, build portfolios, and find teammates and events. Empowers youth to grow skills, collaborate, and build careers.
+            </p>
+            <p class="project-contributors">SIH Project</p>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <img src="https://via.placeholder.com/400x200" alt="MindQuest Project" class="project-image">
+          <div class="project-details">
+            <h3 class="project-title">MindQuest</h3>
+            <p class="project-description">
+              A mental health tracker app with RPG elements that includes self-care quests and an AI health companion.
+            </p>
+            <p class="project-contributors">Idea by Aayat Nizam</p>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <img src="snake-logo.jpg" alt="Snake Game Project" class="project-image">
+          <div class="project-details">
+            <h3 class="project-title">SnakeGame</h3>
+            <p class="project-description">
+              A simple yet classic game built using <strong>Python</strong>. A fun project to showcase programming fundamentals and game development skills.
+            </p>
+            <p class="project-contributors">Initial code by Mohammed Shoaib Khan</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+      <h2 class="section-title">Contact Us</h2>
+      <div class="contact-container">
+        <div class="contact-info">
+          <h3 class="box-title">Get in Touch</h3>
+          <p>Have questions about our projects or interested in collaborating with Sapphire? We'd love to hear from you! Reach out using any of the methods below or fill out the contact form.</p>
+          
+          <div class="contact-methods">
+            <div class="contact-method">
+              <i>📧</i>
+              <h4>Email</h4>
+              <a href="mailto:shardsofsapphire.org@gmail.com">shardsofsapphire.org@gmail.com</a>
+            </div>
+            <div class="contact-method">
+              <i>📱</i>
+              <h4>Phone</h4>
+              <p> <a href="tel:+919391786525">+91 9391786525</a></p>
+
+            </div>
+            <div class="contact-method">
+              <i>🌐</i>
+              <h4>Social</h4>
+              <a href="https://github.com/Shards-Of-Sapphire">GitHub</a> | <a href="http://www.youtube.com/@shards-of-sapphire">YouTube</a> | <a href="https://www.instagram.com/sapphire.official.ig/">Instagram</a> | <a href="https://www.linkedin.com/in/sapphire-team-b1b2b5360?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3Bq%2B7zhQkmTkuofsQwwu8BMg%3D%3D">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="contact-form">
+          <h3 class="box-title">Send a Message</h3>
+          <form id="contactForm"action="mailto:shardsofsapphire.org@gmail.com" method="post" enctype="text/plain">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="submit-button">Send Message</button>
+            <div class="loader" id="submitLoader"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="social-links">
+        <a href="https://github.com/Shards-Of-Sapphire">GitHub</a>
+        <a href="http://www.youtube.com/@shards-of-sapphire">YouTube</a>
+        <a href="https://www.instagram.com/sapphire.official.ig/">Instagram</a>
+        <a href="https://www.linkedin.com/in/sapphire-team-b1b2b5360?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3Bq%2B7zhQkmTkuofsQwwu8BMg%3D%3D">LinkedIn</a>
+      </div>
+      <p>© <span id="year-home">2025</span> Sapphire. All rights reserved.</p>
+    </footer>
+    
+    <button class="back-to-top" id="back-to-top">↑</button>
+  </div>
+
+  <script>
+    // Update year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('year-home').textContent = new Date().getFullYear();
+    
+    // Check localStorage for the current page state when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentPage = localStorage.getItem('currentPage');
+      
+      if (currentPage === 'home') {
+        document.getElementById('landing-page').style.display = 'none';
+        document.getElementById('home-page').style.display = 'block';
+      } else {
+        document.getElementById('landing-page').style.display = 'block';
+        document.getElementById('home-page').style.display = 'none';
+      }
+    });
+    
+    // Begin Journey Button - Show Home Page
+    document.getElementById('begin-journey').addEventListener('click', function() {
+      document.getElementById('landing-page').style.display = 'none';
+      document.getElementById('home-page').style.display = 'block';
+      // Save the current page state in localStorage
+      localStorage.setItem('currentPage', 'home');
+      window.scrollTo(0, 0);
+    });
+    
+    // Return to Landing Page
+    document.getElementById('return-to-landing').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('home-page').style.display = 'none';
+      document.getElementById('landing-page').style.display = 'block';
+      // Save the current page state in localStorage
+      localStorage.setItem('currentPage', 'landing');
+      window.scrollTo(0, 0);
+    });
+    
+    // Back to Top Button
+    const backToTopButton = document.getElementById('back-to-top');
+    
+    window.addEventListener('scroll', function() {
+      if (window.pageYOffset > 300) {
+        backToTopButton.style.display = 'block';
+      } else {
+        backToTopButton.style.display = 'none';
+      }
+    });
+    
+    backToTopButton.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        if (this.getAttribute('href') === '#') return;
+        
+        e.preventDefault();
+        
+        const target = document.querySelector(this.getAttribute('href'));
+        
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 100,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // Contact Form Submission
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form values
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value;
+      
+      // In a real implementation, you would send these values to a server
+      // For now, just show an alert that the form was submitted
+      alert(`Thank you, ${name}! Your message has been sent. We'll get back to you soon.`);
+      
+      // Reset the form
+      this.reset();
+    });
+  </script>
+  <script src="scripts.js"></script>
+</body>
+<form id="contactForm">
+ 
+  </script>
+</html>
