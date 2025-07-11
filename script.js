@@ -17,6 +17,32 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('home-page').style.display = 'none';
   }
   
+  emailjs.init("QQDJd47aK0ayMcPOW");
+
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const loader = document.getElementById('submitLoader');
+    const formStatus = document.getElementById('formStatus');
+    loader.style.display = 'inline-block';
+    formStatus.innerHTML = '';
+    formStatus.className = 'form-status';
+
+    emailjs.sendForm('service_7qqgy6l', 'template_sl50o2d', this)
+      .then(() => {
+        loader.style.display = 'none';
+        formStatus.innerHTML = 'Message sent successfully!';
+        formStatus.className = 'form-status success-message';
+        this.reset();
+      }, (error) => {
+        loader.style.display = 'none';
+        formStatus.innerHTML = 'Failed to send message. Try again later.';
+        formStatus.className = 'form-status error-message';
+        console.error('EmailJS Error:', error);
+      });
+    });
+
+
   // Begin Journey Button - Show Home Page
   document.getElementById('begin-journey').addEventListener('click', function() {
     document.getElementById('landing-page').style.display = 'none';
@@ -72,56 +98,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-  // Contact Form Submission with PHP
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      // Show loader
-      const loader = document.getElementById('submitLoader');
-      loader.style.display = 'inline-block';
-      
-      // Hide any previous status messages
-      const formStatus = document.getElementById('formStatus');
-      formStatus.innerHTML = '';
-      formStatus.className = 'form-status';
-      
-      // Collect form data
-      const formData = new FormData(this);
-      
-      // Send data to the PHP script
-      fetch('send-email.php', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok: ' + response.status);
-        }
-        return response.text();
-      })
-      .then(data => {
-        // Hide loader
-        loader.style.display = 'none';
-        
-        // Show success message
-        formStatus.innerHTML = data;
-        formStatus.className = 'form-status success-message';
-        
-        // Reset the form
-        contactForm.reset();
-      })
-      .catch(error => {
-        // Hide loader
-        loader.style.display = 'none';
-        
-        // Show error message
-        formStatus.innerHTML = 'There was a problem sending your message. Please try again later.';
-        formStatus.className = 'form-status error-message';
-        
-        console.error('Error:', error);
-      });
+  // Contact Form Submission with EmailJS
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const loader = document.getElementById('submitLoader');
+  const formStatus = document.getElementById('formStatus');
+  loader.style.display = 'inline-block';
+  formStatus.innerHTML = '';
+  formStatus.className = 'form-status';
+
+  emailjs.sendForm('service_7qqgy6l', 'template_sl50o2d', this)
+    .then(() => {
+      loader.style.display = 'none';
+      formStatus.innerHTML = 'Message sent successfully!';
+      formStatus.className = 'form-status success-message';
+      this.reset();
+    }, (error) => {
+      loader.style.display = 'none';
+      formStatus.innerHTML = 'Failed to send message. Try again later.';
+      formStatus.className = 'form-status error-message';
+      console.error('EmailJS Error:', error);
     });
-  }
+});
+
 });
