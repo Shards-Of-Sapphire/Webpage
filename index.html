@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta name="description" content="Sapphire: A student-led innovation team with projects in AI, game dev, and more.">
+<meta name="author" content="Sapphire Team">
+<meta name="keywords" content="Sapphire, AI, Game Development, Student Projects, Innovation, LegalEase, MindQuest">
 <head>
+  <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+      (function(){
+        emailjs.init("QQDJd47aK0ayMcPOW"); // Replace with your EmailJS user ID
+      })();
+    </script>
+
+  <meta property="og:title" content="Sapphire">
+  <meta property="og:description" content="A movement of innovators, learners, and creators.">
+  <meta property="og:image" content="URL_TO_SAPPHIRE_LOGO">
+  <meta property="og:url" content="YOUR_FINAL_URL">
+
+  <link rel="icon" href="sapphire-logo.png" type="image/png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sapphire</title>
@@ -372,7 +388,7 @@
       font-size: 1rem;
       transition: background-color 0.3s ease;
     }
-
+    
     .submit-button:hover {
       background-color: #e5782f;
     }
@@ -447,6 +463,15 @@
       }
     }
   </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SGNKWT7C2J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SGNKWT7C2J');
+  </script>
+
 </head>
 <body>
   <!-- Landing Page Content -->
@@ -707,15 +732,15 @@
         </div>
         
         <div class="contact-form">
-          <h3 class="box-title">Send a Message</h3>
-          <form id="contactForm"action="mailto:shardsofsapphire.org@gmail.com" method="post" enctype="text/plain">
+         <h3 class="box-title">Send a Message</h3>
+          <form id="contactForm">
             <div class="form-group">
               <label for="name">Your Name</label>
-              <input type="text" id="name" name="name" required>
+              <input type="text" id="name" name="user_name" required>
             </div>
             <div class="form-group">
               <label for="email">Email Address</label>
-              <input type="email" id="email" name="email" required>
+              <input type="email" id="email" name="user_email" required>
             </div>
             <div class="form-group">
               <label for="subject">Subject</label>
@@ -725,10 +750,16 @@
               <label for="message">Message</label>
               <textarea id="message" name="message" required></textarea>
             </div>
-            <button type="submit" class="submit-button">Send Message</button>
-            <div class="loader" id="submitLoader"></div>
+          
+            <div class="submit-container">
+              <button type="submit" class="submit-button">Send Message</button>
+              <div class="loader" id="submitLoader"></div>
+            </div>
+          
+            <div id="formStatus" class="form-status" role="alert"></div>
           </form>
         </div>
+
       </div>
     </section>
 
@@ -836,9 +867,9 @@
       this.reset();
     });
   </script>
-  <script src="scripts.js"></script>
+  <script src="script.js"></script>
 </body>
-<form id="contactForm">
  
   </script>
 </html>
+
