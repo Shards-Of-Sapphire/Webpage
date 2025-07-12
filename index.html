@@ -1,31 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta name="description" content="Sapphire: A student-led innovation team with projects in AI, game dev, and more.">
-<meta name="author" content="Sapphire Team">
-<meta name="keywords" content="Sapphire, AI, Game Development, Student Projects, Innovation, LegalEase, MindQuest">
 <head>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script type="text/javascript">
-      (function(){
-        emailjs.init("QQDJd47aK0ayMcPOW"); // Replace with your EmailJS user ID
-      })();
-    </script>
-
-  <meta property="og:title" content="Sapphire">
-  <meta property="og:description" content="A movement of innovators, learners, and creators.">
-  <meta property="og:image" content="URL_TO_SAPPHIRE_LOGO">
-  <meta property="og:url" content="YOUR_FINAL_URL">
-
-  <link rel="icon" href="sapphire-logo.png" type="image/png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sapphire</title>
   <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <style>
-    /* Landing Page Styles */
+    /* Global Styles & Variables */
     :root {
       --primary-bg: #0F1C48;
       --secondary-bg: #192d66;
@@ -43,7 +26,7 @@
       --primary-color: #FF6B1A;
       --secondary-color: #FF914D;
       --accent-color: #3b4a78;
-      --text-color: #333333;
+      /* --text-color: #333333;  Remove or comment out to keep original text color */
     }
 
     * {
@@ -88,7 +71,8 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-    
+
+    /* Header & Navigation */
     .centered-header {
       text-align: center;
       padding: 2rem 1rem 1rem;
@@ -123,7 +107,6 @@
       font-weight: 800;
       margin: 0.5rem 0 0;
       display: inline-block;
-      font-family: 'Inter', sans-serif;
       position: relative;
     }
     
@@ -168,6 +151,17 @@
       transform: scale(1.1);
     }
 
+    .mode-toggle i::before {
+      content: "\f186"; /* Font Awesome moon icon */
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+    }
+
+    .mode-toggle i {
+      font-size: 2rem;
+      color: var(--primary-color);
+    }
+
     /* Particle Background */
     .particles-container {
       position: fixed;
@@ -178,7 +172,8 @@
       z-index: -1;
       overflow: hidden;
     }
-    
+
+    /* Hero Section */
     .hero {
       background-color: var(--primary-bg);
       color: var(--primary-color);
@@ -265,7 +260,7 @@
         transform: translateY(0);
       }
     }
-
+    
     /* Navigation */
     nav {
       background-color: var(--secondary-bg);
@@ -717,6 +712,32 @@
       left: 100%;
     }
 
+    .submit-button:active {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 145, 77, 0.2);
+    }
+
+    .submit-button:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255, 145, 77, 0.2);
+    }
+    .submit-button:disabled {
+      background: linear-gradient(90deg, rgba(255, 145, 77, 0.5), rgba(255, 145, 77, 0.5));
+      color: rgba(255, 255, 255, 0.7);
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .submit-button:disabled:active {
+      transform: none;
+      box-shadow: none;
+    }
+    .submit-button:disabled:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Contact Methods */
     .contact-methods {
       display: flex;
       flex-wrap: wrap;
@@ -763,368 +784,8 @@
     .contact-method a:hover {
       color: var(--secondary-color);
     }
-    
-    .footer {
-      background-color: #0F1C48;
-      padding: 1.5rem;
-      text-align: center;
-      color: #ffffff;
-    }
-    
-    .social-links a {
-      color: #FF914D;
-      margin: 0 1rem;
-      text-decoration: none;
-    }
 
-    /* Home Page Content Styles (initially hidden) */
-    .home-content {
-      display: none;
-    }
-    
-    nav {
-      background-color: #192d66;
-      padding: 1rem 0;
-    }
-    
-    .nav-links {
-      display: flex;
-      justify-content: center;
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-    }
-    
-    .nav-links li {
-      margin: 0 1.5rem;
-    }
-    
-    .nav-links a {
-      color: #FF914D;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    
-    .nav-links a:hover {
-      color: #e5782f;
-    }
-
-    .section {
-      padding: 4rem 2rem;
-      margin: 0 auto;
-      max-width: 1200px;
-    }
-    
-    .section-title {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-      color: #FF914D;
-    }
-    
-    /* Team Section */
-    .team-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-    }
-    
-    .team-member {
-      background-color: #192d66;
-      border-radius: 10px;
-      padding: 1.5rem;
-      width: 300px;
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-    
-    .team-member:hover {
-      transform: translateY(-10px);
-    }
-    
-    .member-name {
-      font-weight: 600;
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-    }
-    
-    .member-role {
-      color: #FF6B1A;
-      font-weight: 600;
-      font-style: italic;
-      margin-bottom: 1rem;
-    }
-    
-    .member-details {
-      text-align: left;
-      margin-top: 1rem;
-    }
-    
-    .member-details ul {
-      padding-left: 1.2rem;
-      margin: 0;
-    }
-    
-    .member-details li {
-      margin-bottom: 0.5rem;
-      line-height: 1.4;
-    }
-    
-    /* Vision & Mission Section */
-    .vision-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      margin-bottom: 3rem;
-    }
-    
-    .vision-box, .mission-box, .calestia-box {
-      background-color: #192d66;
-      border-radius: 10px;
-      padding: 2rem;
-    }
-    
-    .box-title {
-      font-size: 1.8rem;
-      margin-bottom: 1.5rem;
-      color: #FF914D;
-    }
-    
-    .philosophy {
-      font-style: italic;
-      font-size: 1.3rem;
-      margin: 2rem 0;
-      text-align: center;
-      color: #FF6B1A;
-    }
-    
-    /* Projects Section */
-    .projects-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
-      width: 100%;
-    }
-    
-    .project-card {
-      background-color: #192d66;
-      border-radius: 10px;
-      overflow: hidden;
-      transition: transform 0.3s ease;
-    }
-    
-    .project-card:hover {
-      transform: translateY(-10px);
-    }
-    
-    .project-image {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      background-color: #4B5D9B;
-    }
-    
-    .project-details {
-      padding: 1.5rem;
-    }
-    
-    .project-title {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      color: #FF914D;
-    }
-    
-    .project-description {
-      margin-bottom: 1rem;
-      line-height: 1.5;
-    }
-    
-    .project-contributors {
-      font-style: italic;
-      font-size: 0.9rem;
-      color: #c9d8ff;
-    }
-
-    /* Back to Top Button */
-    .back-to-top {
-      background-color: #FF914D;
-      color: #0F1C48;
-      border: none;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      cursor: pointer;
-      display: none;
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    /* Return to Landing Button */
-    .return-button {
-      background-color: #4B5D9B;
-      color: white;
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 1rem;
-    }
-
-    /* Calestia Section */
-    .calestia-section {
-      margin-top: 2rem;
-    }
-    
-    .calestia-container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    
-    .calestia-highlight {
-      font-weight: 600;
-      color: #FF6B1A;
-    }
-
-    /* Contact Section Styles */
-    .contact-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .contact-info {
-      background-color: #192d66;
-      border-radius: 10px;
-      padding: 2rem;
-      width: 100%;
-      margin-bottom: 2rem;
-    }
-
-    .contact-form {
-      background-color: #192d66;
-      border-radius: 10px;
-      padding: 2rem;
-      width: 100%;
-    }
-
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 0.8rem;
-      border: 2px solid #4B5D9B;
-      border-radius: 5px;
-      background-color: #0F1C48;
-      color: #FF914D;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .form-group textarea {
-      min-height: 150px;
-      resize: vertical;
-    }
-
-    .submit-button {
-      background-color: #FF914D;
-      color: #0F1C48;
-      font-weight: bold;
-      padding: 0.8rem 1.5rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background-color 0.3s ease;
-    }
-    
-    .submit-button:hover {
-      background-color: #e5782f;
-    }
-
-    .contact-methods {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      margin-top: 1.5rem;
-    }
-
-    .contact-method {
-      text-align: center;
-      margin-bottom: 1rem;
-      flex: 1;
-      min-width: 150px;
-    }
-
-    .contact-method i {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-      color: #FF914D;
-    }
-
-    .contact-method a {
-      color: #FF914D;
-      text-decoration: none;
-    }
-
-    .contact-method a:hover {
-      color: #e5782f;
-    }
-
-    /* Social Links Styles */
-    .social-links {
-      margin: 1rem 0;
-    }
-    
-    .social-links a {
-      display: inline-block;
-      margin: 0 0.8rem;
-      color: #FF914D;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    
-    .social-links a:hover {
-      color: #e5782f;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .vision-container {
-        grid-template-columns: 1fr;
-      }
-      
-      .nav-links {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .nav-links li {
-        margin: 0.5rem 0;
-      }
-
-      .contact-methods {
-        flex-direction: column;
-      }
-
-      .contact-method {
-        margin-bottom: 2rem;
-      }
-
-      /* Footer */
+    /* Footer */
     .footer {
       background-color: var(--secondary-bg);
       padding: 3rem 1.5rem;
@@ -1304,21 +965,11 @@
       .section-title {
         font-size: 2rem;
       }
-      
     }
   </style>
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SGNKWT7C2J"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-SGNKWT7C2J');
-  </script>
-
 </head>
 <body>
-    <!-- Preloader -->
+  <!-- Preloader -->
   <div class="preloader" id="preloader">
     <div class="loader"></div>
   </div>
@@ -1330,9 +981,7 @@
 
   <!-- Mode Toggle -->
   <div class="mode-toggle" id="modeToggle">
-    <i class="fas fa-moon">
-      ::before
-    </i>
+    <i class="fas fa-moon"></i>
   </div>
 
   <!-- Particle Background -->
@@ -1556,7 +1205,9 @@
         <div class="project-card">
           <img src="snake-logo.jpg" alt="Snake Game Project" class="project-image">
           <div class="project-details">
-            <h3 class="project-title">SnakeGame</h3>
+            <h3 class="project-title">
+              <a href="https://github.com/Shards-Of-Sapphire/Snake-game.git" class="github-link" target="_blank"style="color: #FF914D; text-decoration: none;"<link rel="stylesheet" href="">SnakeGame</a>
+            </h3>
             <p class="project-description">
               A simple yet classic game built using <strong>Python</strong>. A fun project to showcase programming fundamentals and game development skills.
             </p>
@@ -1595,15 +1246,15 @@
         </div>
         
         <div class="contact-form">
-         <h3 class="box-title">Send a Message</h3>
-          <form id="contactForm">
+          <h3 class="box-title">Send a Message</h3>
+          <form id="contactForm"action="mailto:shardsofsapphire.org@gmail.com" method="post" enctype="text/plain">
             <div class="form-group">
               <label for="name">Your Name</label>
-              <input type="text" id="name" name="user_name" required>
+              <input type="text" id="name" name="name" required>
             </div>
             <div class="form-group">
               <label for="email">Email Address</label>
-              <input type="email" id="email" name="user_email" required>
+              <input type="email" id="email" name="email" required>
             </div>
             <div class="form-group">
               <label for="subject">Subject</label>
@@ -1613,16 +1264,10 @@
               <label for="message">Message</label>
               <textarea id="message" name="message" required></textarea>
             </div>
-          
-            <div class="submit-container">
-              <button type="submit" class="submit-button">Send Message</button>
-              <div class="loader" id="submitLoader"></div>
-            </div>
-          
-            <div id="formStatus" class="form-status" role="alert"></div>
+            <button type="submit" class="submit-button">Send Message</button>
+            <div class="loader" id="submitLoader"></div>
           </form>
         </div>
-
       </div>
     </section>
 
@@ -1970,6 +1615,7 @@ animationStyles.textContent = `
   }
 `;
 document.head.appendChild(animationStyles);
+
     
     // Check localStorage for the current page state when the page loads
     document.addEventListener('DOMContentLoaded', function() {
@@ -1983,7 +1629,7 @@ document.head.appendChild(animationStyles);
         document.getElementById('home-page').style.display = 'none';
       }
 
-        // Add click event for SnakeGame card redirect
+      // Add click event for SnakeGame card redirect
     const snakeGameCard = document.getElementById('snakegame-card');
     if (snakeGameCard) {
       snakeGameCard.addEventListener('click', function(e) {
@@ -1997,7 +1643,7 @@ document.head.appendChild(animationStyles);
         window.open('https://github.com/Shards-Of-Sapphire/Snake-game.git', '_blank');
       });
     }
-    });
+  });
     
     // Begin Journey Button - Show Home Page
     document.getElementById('begin-journey').addEventListener('click', function() {
@@ -2072,10 +1718,14 @@ document.head.appendChild(animationStyles);
       this.reset();
     });
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.9.3/tsparticles.bundle.min.js"></script>
+  <!-- Other content... -->
+  
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.9.3/tsparticles.bundle.min.js"></script>
   <script src="scripts.js"></script>
 </body>
+<form id="contactForm">
  
   </script>
 </html>
-
