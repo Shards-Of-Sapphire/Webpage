@@ -1713,6 +1713,11 @@ document.head.appendChild(animationStyles);
       // Reset the form
       this.reset();
     });
+
+    window.onbeforeunload = function () {
+      window.scrollTo(0, 0);
+    };
+
   </script>
   <!-- Other content... -->
   
@@ -1720,6 +1725,7 @@ document.head.appendChild(animationStyles);
 
 <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.9.3/tsparticles.bundle.min.js"></script>
   <script src="scripts.js"></script>
+
 </body>
 <form id="contactForm">
  
