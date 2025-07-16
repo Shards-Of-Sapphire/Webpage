@@ -25,6 +25,11 @@ body {
   margin-right: 0.5rem;
 }
 
+.logo-image {
+  height: 40px; /* adjust as needed */
+  vertical-align: middle;
+}
+
 .site-title {
   font-size: 3.5rem;
   font-weight: 800;
