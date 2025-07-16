@@ -123,3 +123,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 });
+
+window.addEventListener("load", () => {
+  const landing = document.getElementById("landing-page");
+  if (landing) {
+    landing.scrollIntoView({ behavior: "instant" }); // Use 'smooth' if you want animation
+  }
+});
