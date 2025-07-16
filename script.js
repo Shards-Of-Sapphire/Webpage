@@ -130,3 +130,7 @@ window.addEventListener("load", () => {
     landing.scrollIntoView({ behavior: "instant" }); // Use 'smooth' if you want animation
   }
 });
+
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0);
+};
