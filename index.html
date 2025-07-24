@@ -1723,14 +1723,14 @@ document.head.appendChild(animationStyles);
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.9.3/tsparticles.bundle.min.js"></script>
-  <script src="scripts.js"></script>
-
-window.addEventListener("load", () => {
+  <script src="scripts.js">
+    window.addEventListener("load", () => {
   const landing = document.getElementById("landing-page");
   if (landing) {
     landing.scrollIntoView({ behavior: "instant" }); // Use 'smooth' if you want animation
   }
 });
+  </script>
 
   <form id="contactForm">
    <script type="text/javascript">
