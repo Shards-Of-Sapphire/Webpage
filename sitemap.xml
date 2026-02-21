@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  sitemap.xml for Sapphire (shards-of-sapphire.github.io)
+  PDF Reference: Part 4 — Sitemaps
+  
+  Instructions:
+  - Upload this file to your site root
+  - Submit URL (https://shards-of-sapphire.github.io/sitemap.xml)
+    to Google Search Console and Bing Webmaster Tools
+  - Update <lastmod> dates whenever you change a page
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Homepage / Landing Page -->
+  <url>
+    <loc>https://shards-of-sapphire.github.io/</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+</urlset>
