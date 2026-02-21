@@ -1,0 +1,16 @@
+# ============================================================
+#  robots.txt for Sapphire (shards-of-sapphire.github.io)
+#  PDF Reference: Part 5 — Robots.txt
+# ============================================================
+
+# Allow all search engines to crawl everything
+User-agent: *
+Allow: /
+
+# Block private / utility paths (none currently, but ready for future)
+# Disallow: /admin/
+# Disallow: /api/
+# Disallow: /private/
+
+# Point to sitemap so engines find it instantly
+Sitemap: https://shards-of-sapphire.github.io/sitemap.xml
