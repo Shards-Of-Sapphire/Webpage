@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="google-site-verification" content="xAJMZKzWy4i1zk3oh8KMYYxf9guIIadLGUoNgZdnoWA" />
+  <meta name="google-site-verification" content="A6qktKlEmjXjUACoqTlBL4jkoNVazsmEtC-AS4SfJeU" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SGNKWT7C2J');
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SGNKWT7C2J"></script>
   <title>Sapphire</title>
   <meta name="description" content="Sapphire is a movement of innovators, learners, and creators from CS-AIML. We build web apps, AI projects, and handle digital presence. Based in Hyderabad.">
   <meta name="robots" content="index, follow">
@@ -26,6 +34,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
   <style>
@@ -123,11 +132,16 @@
       text-align:center;padding:2rem;
     }
     .lp-logo{
-      width:clamp(60px,10vw,120px);
-      filter:drop-shadow(0 0 24px rgba(232,132,74,.5));
-      opacity:0;transform:scale(.85);
-      animation:popIn .9s .5s cubic-bezier(.34,1.56,.64,1) forwards;
+      width:130px;
+      height:auto;
+      filter:drop-shadow(0 10px 10px rgba(0,0,0,0.3));
+      animation:logoFloat 3s ease-in-out infinite;
       margin-bottom:1.5rem;
+    }
+    @keyframes logoFloat{
+      0%{transform:translateY(0px)}
+      50%{transform:translateY(-10px)}
+      100%{transform:translateY(0px)}
     }
     .lp-eye{
       font-family:'DM Mono',monospace;font-size:.7rem;
@@ -136,8 +150,8 @@
       margin-bottom:1rem;
     }
     .lp-h1{
-      font-family:'Playfair Display',Georgia,serif;
-      font-size:clamp(3rem,9vw,7rem);font-weight:900;font-style:italic;
+      font-family:'Montserrat','Inter',sans-serif;
+      font-size:clamp(3rem,9vw,7rem);font-weight:900;font-style:normal;
       line-height:1.0;letter-spacing:-.01em;
       opacity:0;transform:translateY(28px);
       animation:rise .9s .75s cubic-bezier(.22,1,.36,1) forwards;
@@ -509,6 +523,9 @@
     .particle{position:fixed;border-radius:50%;pointer-events:none;z-index:0;animation:floatUp linear infinite}
     @keyframes floatUp{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:.6}90%{opacity:.3}100%{transform:translateY(-10vh) scale(1.2);opacity:0}}
 
+    /* tsParticles canvas */
+    #particles-js{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;}
+
     /* cursor glow */
     .cursor-glow{position:fixed;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(232,132,74,.08) 0%,transparent 70%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:left .06s,top .06s}
 
@@ -677,6 +694,7 @@
 </head>
 <body>
 
+<div id="particles-js"></div>
 <canvas id="sf"></canvas>
 <div class="cursor-glow" id="cursorGlow"></div>
 
@@ -876,7 +894,7 @@
             <div class="cm-ico"><i class="fas fa-envelope"></i></div>
             <div>
               <div class="cm-lbl">Email</div>
-              <div class="cm-val"><a href="mailto:shardsofsapphire.org@gmail.com">shardsofsapphire.org@gmail.com</a></div>
+              <div class="cm-val"><a href="/cdn-cgi/l/email-protection#d7a4bfb6a5b3a4b8b1a4b6a7a7bfbea5b2f9b8a5b097b0bab6bebbf9b4b8ba"><span class="__cf_email__" data-cfemail="52213a332036213d34213322223a3b20377c3d203512353f333b3e7c313d3f">[email&#160;protected]</span></a></div>
             </div>
           </div>
           <div class="cm">
@@ -1307,7 +1325,7 @@
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* STARFIELD */
 (()=>{
   const c=document.getElementById('sf'),x=c.getContext('2d');
@@ -1510,11 +1528,50 @@ document.getElementById('cForm').addEventListener('submit',async function(e){
     }
   } catch(err){
     msgEl.className='err';
-    msgEl.textContent='Network error. Please email us directly at shardsofsapphire.org@gmail.com';
+    msgEl.textContent='Network error. Please try again.';
   }
-  btn.innerHTML='Send Message &nbsp;<i class="fas fa-paper-plane"></i>';
+  btn.innerHTML='Send Message <i class="fas fa-paper-plane"></i>';
   btn.disabled=false;
+  msgEl.style.display='block';
 });
+
 </script>
+
+<!-- tsParticles -->
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.9.3/tsparticles.bundle.min.js"></script>
+<script>
+(async()=>{
+  if(typeof tsParticles==='undefined')return;
+  await tsParticles.load("particles-js",{
+    particles:{
+      number:{value:80,density:{enable:true,value_area:800}},
+      color:{value:"#FF914D"},
+      shape:{type:"circle"},
+      opacity:{value:0.5,random:true,anim:{enable:true,speed:1,opacity_min:0.1,sync:false}},
+      size:{value:3,random:true,anim:{enable:true,speed:2,size_min:0.1,sync:false}},
+      line_linked:{enable:true,distance:150,color:"#4B5D9B",opacity:0.4,width:1},
+      move:{enable:true,speed:2,direction:"none",random:true,straight:false,out_mode:"out",bounce:false}
+    },
+    interactivity:{
+      detect_on:"canvas",
+      events:{
+        onhover:{enable:true,mode:"grab"},
+        onclick:{enable:true,mode:"push"},
+        resize:true
+      },
+      modes:{
+        grab:{distance:140,line_linked:{opacity:1}},
+        push:{particles_nb:4},
+        remove:{particles_nb:2}
+      }
+    },
+    retina_detect:true
+  });
+  // Allow pointer events on canvas so interactivity works
+  const canvas=document.querySelector('#particles-js canvas');
+  if(canvas)canvas.style.pointerEvents='auto';
+})();
+</script>
+
 </body>
 </html>
