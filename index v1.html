@@ -895,7 +895,7 @@
             <div class="cm-ico"><i class="fas fa-envelope"></i></div>
             <div>
               <div class="cm-lbl">Email</div>
-              <div class="cm-val"><a href="mailto:shardsofsapphire.org@gmail.com">shardsofsapphire.org@gmail.com</a></div>
+              <div class="cm-val"><a href="/cdn-cgi/l/email-protection#ff8c979e8d9b8c90998c9e8f8f97968d9ad1908d98bf98929e9693d19c9092"><span class="__cf_email__" data-cfemail="cfbca7aebdabbca0a9bcaebfbfa7a6bdaae1a0bda88fa8a2aea6a3e1aca0a2">[email&#160;protected]</span></a></div>
             </div>
           </div>
           <div class="cm">
@@ -1327,7 +1327,7 @@
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* STARFIELD */
 (()=>{
   const c=document.getElementById('sf'),x=c.getContext('2d');
@@ -1390,42 +1390,98 @@ const pb=document.getElementById('pb');
 addEventListener('scroll',()=>{const s=document.documentElement;pb.style.width=((s.scrollTop/(s.scrollHeight-s.clientHeight))*100)+'%'});
 
 /* ── SOUND ENGINE ── */
-const _ac=new(window.AudioContext||window.webkitAudioContext)();
-function _resumeAC(){if(_ac.state==='suspended')_ac.resume();}
+let _ac=null,_master=null;
+function _resumeAC(){
+  if(!_ac){
+    _ac=new(window.AudioContext||window.webkitAudioContext)();
+    /* hard limiter so we never clip */
+    const lim=_ac.createDynamicsCompressor();
+    lim.threshold.value=-1;lim.knee.value=0;
+    lim.ratio.value=20;lim.attack.value=0.001;lim.release.value=0.05;
+    /* master boost */
+    _master=_ac.createGain();
+    _master.gain.value=8;
+    _master.connect(lim);lim.connect(_ac.destination);
+  }
+  if(_ac.state==='suspended')_ac.resume();
+}
+/* layered tone: fundamental + octave harmonic for body */
 function sfxTone(freq1,freq2,dur,vol,type='sine'){
   _resumeAC();
-  const o=_ac.createOscillator(),g=_ac.createGain();
-  o.type=type;o.connect(g);g.connect(_ac.destination);
-  o.frequency.setValueAtTime(freq1,_ac.currentTime);
-  o.frequency.exponentialRampToValueAtTime(freq2,_ac.currentTime+dur);
-  g.gain.setValueAtTime(vol,_ac.currentTime);
-  g.gain.exponentialRampToValueAtTime(0.0001,_ac.currentTime+dur);
-  o.start();o.stop(_ac.currentTime+dur+0.01);
+  const t=_ac.currentTime;
+  [1,0.5].forEach((mult,i)=>{
+    const o=_ac.createOscillator(),g=_ac.createGain();
+    o.type=i===0?type:'triangle';
+    o.connect(g);g.connect(_master);
+    o.frequency.setValueAtTime(freq1*mult,t);
+    o.frequency.exponentialRampToValueAtTime(freq2*mult,t+dur);
+    const v=vol*(i===0?1:0.4);
+    g.gain.setValueAtTime(v,t);
+    g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+    o.start();o.stop(t+dur+0.02);
+  });
 }
+/* fat noise burst */
 function sfxNoise(dur,vol,hipass){
   _resumeAC();
   const buf=_ac.createBuffer(1,_ac.sampleRate*dur,_ac.sampleRate);
   const d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
   const src=_ac.createBufferSource(),g=_ac.createGain(),f=_ac.createBiquadFilter();
   f.type='highpass';f.frequency.value=hipass;
-  src.buffer=buf;src.connect(f);f.connect(g);g.connect(_ac.destination);
+  src.buffer=buf;src.connect(f);f.connect(g);g.connect(_master);
   g.gain.setValueAtTime(vol,_ac.currentTime);
   g.gain.exponentialRampToValueAtTime(0.0001,_ac.currentTime+dur);
   src.start();src.stop(_ac.currentTime+dur);
 }
-function sfxTick(){sfxTone(900,600,0.06,0.07);}
-function sfxPageOpen(){sfxTone(300,900,0.12,0.10);setTimeout(()=>sfxTone(900,1200,0.08,0.06),80);}
-function sfxPageClose(){sfxTone(800,280,0.13,0.09);}
-function sfxCTA(){sfxTone(440,880,0.1,0.13,'triangle');setTimeout(()=>sfxTone(880,1320,0.1,0.07),90);}
-function sfxPop(){sfxTone(600,1000,0.07,0.09);sfxTone(1000,700,0.07,0.04);}
-function sfxSuccess(){[0,100,200].forEach((d,i)=>setTimeout(()=>sfxTone([523,659,784][i],[659,784,1047][i],0.15,0.09),d));}
-function sfxError(){sfxTone(220,180,0.18,0.12,'sawtooth');}
-function playClick(toLight){
-  if(toLight){sfxTone(600,1400,0.09,0.13);setTimeout(()=>sfxTone(1400,1800,0.06,0.06),70);}
-  else{sfxTone(900,300,0.1,0.12);setTimeout(()=>sfxNoise(0.06,0.04,800),40);}
+/* PUNCHY tick — double click feel */
+function sfxTick(){
+  sfxTone(1100,600,0.08,0.9);
+  sfxNoise(0.04,0.3,2000);
 }
-function sfxNavToggle(){sfxNoise(0.05,0.06,1200);}
-function sfxFocus(){sfxTone(700,900,0.05,0.04);}
+/* PAGE OPEN — big whoosh sweep */
+function sfxPageOpen(){
+  sfxNoise(0.12,0.5,400);
+  sfxTone(200,1200,0.22,0.9);
+  setTimeout(()=>sfxTone(1200,1600,0.1,0.6),120);
+}
+/* PAGE CLOSE — downward slam */
+function sfxPageClose(){
+  sfxTone(900,120,0.2,0.9,'sawtooth');
+  sfxNoise(0.08,0.4,600);
+}
+/* CTA — fanfare */
+function sfxCTA(){
+  sfxTone(440,880,0.15,0.9,'triangle');
+  setTimeout(()=>sfxTone(880,1320,0.15,0.7,'triangle'),90);
+  setTimeout(()=>sfxTone(1320,1760,0.12,0.5,'triangle'),180);
+}
+/* POP — satisfying thud */
+function sfxPop(){
+  sfxTone(180,60,0.15,1.0,'sine');
+  sfxTone(900,300,0.1,0.6);
+  sfxNoise(0.05,0.35,1500);
+}
+/* SUCCESS — triumphant 3-note chord */
+function sfxSuccess(){
+  [[523,659],[659,784],[784,1047],[1047,1400]].forEach(([f1,f2],i)=>{
+    setTimeout(()=>{sfxTone(f1,f2,0.22,0.8,'triangle');sfxTone(f1*0.5,f2*0.5,0.22,0.5);},i*90);
+  });
+}
+/* ERROR — harsh buzz */
+function sfxError(){
+  sfxTone(260,180,0.3,0.9,'sawtooth');
+  sfxTone(130,90,0.3,0.5,'square');
+  sfxNoise(0.15,0.35,200);
+}
+/* THEME TOGGLE */
+function playClick(toLight){
+  if(toLight){sfxTone(500,1600,0.15,0.9);setTimeout(()=>sfxTone(1600,2400,0.1,0.6),80);sfxNoise(0.06,0.3,3000);}
+  else{sfxTone(1200,200,0.18,0.9,'sawtooth');setTimeout(()=>sfxNoise(0.1,0.5,500),30);}
+}
+/* NAV TOGGLE — snappy crack */
+function sfxNavToggle(){sfxNoise(0.07,0.8,1500);sfxTone(400,600,0.06,0.5);}
+/* FOCUS — gentle chime */
+function sfxFocus(){sfxTone(800,1100,0.1,0.6);}
 
 /* THEME */
 const tb=document.getElementById('themeBtn');
@@ -1636,16 +1692,4 @@ document.querySelectorAll('a[target="_blank"]').forEach(a=>{
       modes:{
         grab:{distance:140,line_linked:{opacity:1}},
         push:{particles_nb:4},
-        remove:{particles_nb:2}
-      }
-    },
-    retina_detect:true
-  });
-  // Allow pointer events on canvas so interactivity works
-  const canvas=document.querySelector('#particles-js canvas');
-  if(canvas)canvas.style.pointerEvents='auto';
-})();
-</script>
-
-</body>
-</html>
+        remov
