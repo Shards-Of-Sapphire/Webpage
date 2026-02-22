@@ -107,15 +107,26 @@
     /* preloader */
     .pre{
       position:fixed;inset:0;background:var(--bg);z-index:9000;
-      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3.5rem;
       transition:opacity .7s,visibility .7s;
     }
     .pre.gone{opacity:0;visibility:hidden}
-    .pre-name{
-      font-family:'Playfair Display',Georgia,serif;
-      font-size:2.5rem;font-weight:900;color:var(--amber);letter-spacing:.08em;font-style:italic;
+    .pre-logo{
+      width:200px;height:200px;
+      filter:drop-shadow(0 0 40px rgba(232,132,74,.5)) drop-shadow(0 0 80px rgba(232,132,74,.2));
+      animation:preLogoIn 1s cubic-bezier(.34,1.56,.64,1) forwards;
+      opacity:0;transform:scale(.5);
     }
-    .pre-track{width:180px;height:1px;background:var(--bg3);overflow:hidden}
+    @keyframes preLogoIn{to{opacity:1;transform:scale(1)}}
+    .pre-name{
+      font-family:'Montserrat','Inter',sans-serif;
+      font-size:2.4rem;font-weight:900;color:var(--amber);letter-spacing:.18em;
+      text-transform:uppercase;
+      animation:preNameIn .7s .3s cubic-bezier(.22,1,.36,1) forwards;
+      opacity:0;transform:translateY(10px);
+    }
+    @keyframes preNameIn{to{opacity:1;transform:none}}
+    .pre-track{width:100px;height:1px;background:var(--bg3);overflow:hidden}
     .pre-fill{height:100%;background:linear-gradient(90deg,var(--amber2),var(--amber));animation:prefill 1.3s ease forwards}
     @keyframes prefill{from{width:0}to{width:100%}}
 
@@ -196,7 +207,7 @@
 
     /* navbar */
     .nav{
-      position:sticky;top:0;z-index:200;height:60px;
+      position:sticky;top:0;z-index:200;height:72px;
       background:rgba(5,8,15,.82);backdrop-filter:blur(20px);
       border-bottom:1px solid var(--border);
       padding:0 2rem;
@@ -204,9 +215,17 @@
     }
     body.light .nav{background:rgba(250,248,244,.88)}
     .nav-brand{
-      font-family:'Playfair Display',Georgia,serif;font-size:1.3rem;font-weight:900;
-      color:var(--amber);letter-spacing:.04em;font-style:italic;
+      display:flex;align-items:center;gap:.55rem;
+      font-family:'Montserrat','Inter',sans-serif;font-size:1.25rem;font-weight:900;
+      color:var(--amber);letter-spacing:.08em;text-transform:uppercase;
     }
+    .nav-logo{
+      width:52px;height:52px;
+      filter:drop-shadow(0 0 10px rgba(232,132,74,.5));
+      transition:filter .3s;flex-shrink:0;
+    }
+    .nav-brand-text{letter-spacing:.1em}
+    .nav-home-link{color:var(--amber)!important}
     .nav-ul{display:flex;align-items:center;gap:.15rem;list-style:none}
     .nav-ul a{
       font-size:.85rem;font-weight:400;padding:.36rem .8rem;
@@ -674,10 +693,6 @@
     }
     .page-overlay .tc.in,.page-overlay .srv-card.in,.page-overlay .pc.in,.page-overlay .vc.in{opacity:1;transform:none}
 
-    /* typing cursor for preloader */
-    .pre-name::after{content:'|';animation:blink .8s step-end infinite;color:var(--gold)}
-    @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-
     /* ribbon on celestia page */
     .cel-ribbon{
       display:inline-flex;align-items:center;gap:.6rem;
@@ -690,6 +705,56 @@
     }
     @keyframes pulseBorder{0%,100%{border-color:rgba(51,85,204,.3)}50%{border-color:rgba(51,85,204,.7)}}
 
+    /* ── PORTFOLIO PAGE ── */
+    .port-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.4rem}
+    .port-card{
+      background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);
+      overflow:hidden;position:relative;
+      transition:transform var(--t),box-shadow var(--t),border-color var(--t);
+      display:flex;flex-direction:column;
+    }
+    .port-card::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,var(--amber2),var(--gold));
+      transform:scaleX(0);transform-origin:left;transition:transform var(--t);
+    }
+    .port-card:hover{transform:translateY(-6px);box-shadow:var(--glow);border-color:rgba(232,132,74,.25)}
+    .port-card:hover::before{transform:scaleX(1)}
+    .port-img{
+      width:100%;height:190px;object-fit:cover;
+      background:linear-gradient(135deg,var(--bg3),var(--bg4));
+      display:flex;align-items:center;justify-content:center;
+      font-size:3rem;color:var(--muted);
+    }
+    .port-img img{width:100%;height:100%;object-fit:cover}
+    .port-body{padding:1.5rem;flex:1;display:flex;flex-direction:column;gap:.55rem}
+    .port-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.2rem}
+    .port-tag{
+      font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.08em;
+      padding:.18rem .55rem;border-radius:100px;
+      background:var(--bg3);color:var(--amber);border:1px solid rgba(232,132,74,.2);
+      text-transform:uppercase;
+    }
+    .port-title{font-family:'Playfair Display',Georgia,serif;font-size:1.15rem;font-weight:700;line-height:1.25}
+    .port-client{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);letter-spacing:.04em}
+    .port-desc{color:var(--soft);font-size:.88rem;line-height:1.75;flex:1}
+    .port-foot{display:flex;align-items:center;justify-content:space-between;margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--border)}
+    .port-year{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted)}
+    .port-link{
+      display:inline-flex;align-items:center;gap:.4rem;
+      font-family:'DM Mono',monospace;font-size:.75rem;color:var(--amber);
+      transition:gap .3s;
+    }
+    .port-link:hover{gap:.7rem}
+    .port-empty{
+      text-align:center;padding:5rem 2rem;
+      background:var(--bg2);border:1px dashed var(--border);border-radius:var(--r);
+    }
+    .port-empty-icon{font-size:3rem;margin-bottom:1rem;opacity:.4}
+    .port-empty-title{font-family:'Playfair Display',Georgia,serif;font-size:1.4rem;font-weight:700;margin-bottom:.6rem;color:var(--soft)}
+    .port-empty-sub{color:var(--muted);font-size:.9rem;font-style:italic}
+    .port-stats{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;padding:2rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);margin-bottom:2rem}
+
   </style>
 </head>
 <body>
@@ -699,7 +764,7 @@
 <div class="cursor-glow" id="cursorGlow"></div>
 
 <div class="pre" id="pre">
-  <div class="pre-name">Sapphire</div>
+  <img src="sapphire-logo.png" alt="Sapphire" class="pre-logo">
   <div class="pre-track"><div class="pre-fill"></div></div>
 </div>
 
@@ -726,14 +791,18 @@
 <div id="hp">
 
   <nav class="nav" role="navigation" aria-label="Main navigation">
-    <a href="#" class="nav-brand" id="returnLanding">Sapphire</a>
+    <div class="nav-brand">
+      <img src="sapphire-logo.png" alt="Sapphire" class="nav-logo">
+    </div>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
     <ul class="nav-ul" id="navUl">
+      <li><a href="#" id="returnLanding" class="nav-home-link">Home</a></li>
       <li><a href="javascript:void(0)" data-page="team">Team</a></li>
       <li><a href="javascript:void(0)" data-page="vision">Vision</a></li>
       <li><a href="javascript:void(0)" data-page="celestia">Celestia</a></li>
       <li><a href="javascript:void(0)" data-page="services">Services</a></li>
       <li><a href="javascript:void(0)" data-page="projects">Projects</a></li>
+      <li><a href="javascript:void(0)" data-page="portfolio">Portfolio</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="ctrl-btn nav-ctrl" id="themeBtnNav" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
@@ -974,6 +1043,7 @@
       <a href="javascript:void(0)" data-page="celestia">Celestia</a>
       <a href="javascript:void(0)" data-page="services">Services</a>
       <a href="javascript:void(0)" data-page="projects">Projects</a>
+      <a href="javascript:void(0)" data-page="portfolio">Portfolio</a>
       <a href="#contact">Contact</a>
     </nav>
     <p class="foot-copy">&#169; <span id="yr"></span> Sapphire. All rights reserved. &nbsp;&#183;&nbsp; Built with passion in Hyderabad.</p>
@@ -1327,7 +1397,79 @@
   </div>
 </div>
 
-<script>
+<!-- PORTFOLIO PAGE -->
+<div class="page-overlay" id="page-portfolio" role="dialog" aria-label="Portfolio page">
+  <header class="page-header">
+    <button class="page-back" onclick="closePage('portfolio')"><i class="fas fa-arrow-left"></i> Back</button>
+    <span class="page-title-bar">Sapphire — <em style="color:var(--amber);font-style:normal">Portfolio</em></span>
+  </header>
+  <div class="page-content">
+    <div class="page-hero">
+      <div style="position:relative;overflow:hidden;border-radius:16px;padding:3rem;background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px solid var(--border);margin-bottom:2rem">
+        <div class="orb orb-1"></div><div class="orb orb-2"></div>
+        <span class="sh-eye">Our Work</span>
+        <h1 class="page-hero-title" style="font-family:'Montserrat','Inter',sans-serif">Port<em style="color:var(--amber)">folio</em></h1>
+        <p class="page-hero-sub">A curated showcase of websites, apps, and digital experiences we've built for clients and for ourselves.</p>
+      </div>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="port-stats page-rv">
+      <div class="dash-stat">
+        <span class="dash-num">0</span>
+        <span class="dash-lbl">Client Projects</span>
+      </div>
+      <div class="dash-stat">
+        <span class="dash-num">6</span>
+        <span class="dash-lbl">Internal Projects</span>
+      </div>
+      <div class="dash-stat">
+        <span class="dash-num">∞</span>
+        <span class="dash-lbl">Possibilities</span>
+      </div>
+    </div>
+
+    <!-- Portfolio grid — add .port-card items here when you have client work -->
+    <div class="port-grid" id="portGrid">
+
+      <!-- ═══ ADD NEW PORTFOLIO CARDS BELOW THIS LINE ═══
+
+      TEMPLATE — copy & paste this block for each new portfolio item:
+
+      <article class="port-card page-rv">
+        <div class="port-img">🌐</div>
+        ── OR use an image: ──
+        <div class="port-img"><img src="your-screenshot.jpg" alt="Project Name"></div>
+        <div class="port-body">
+          <div class="port-tags">
+            <span class="port-tag">Web Design</span>
+            <span class="port-tag">React</span>
+          </div>
+          <div class="port-client">Client Name · Industry</div>
+          <h3 class="port-title">Project Title</h3>
+          <p class="port-desc">Brief description of the project, what problem it solved, and what technologies were used.</p>
+          <div class="port-foot">
+            <span class="port-year">2025</span>
+            <a href="#" target="_blank" rel="noopener" class="port-link">View Live <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+
+      ═══ END TEMPLATE ═══ -->
+
+    </div>
+
+    <!-- Empty state — shown when no cards exist; remove when you add cards -->
+    <div class="port-empty page-rv" id="portEmpty">
+      <div class="port-empty-icon">✦</div>
+      <h3 class="port-empty-title">Portfolio Coming Soon</h3>
+      <p class="port-empty-sub">We're building something great. Client work and featured projects will be showcased here soon.<br>Check back later — or <a href="#contact" style="color:var(--amber)" onclick="closePage('portfolio');setTimeout(()=>document.querySelector('#contact').scrollIntoView({behavior:'smooth'}),300)">reach out to collaborate</a>.</p>
+    </div>
+
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* STARFIELD */
 (()=>{
   const c=document.getElementById('sf'),x=c.getContext('2d');
@@ -1374,8 +1516,10 @@
   document.addEventListener('mousemove',e=>{g.style.left=e.clientX+'px';g.style.top=e.clientY+'px'});
 })();
 
-window.addEventListener('load',()=>setTimeout(()=>document.getElementById('pre').classList.add('gone'),1350));
+window.addEventListener('load',()=>setTimeout(()=>document.getElementById('pre').classList.add('gone'),1600));
 document.getElementById('yr').textContent=new Date().getFullYear();
+// Portfolio: hide empty state if cards exist
+(()=>{const g=document.getElementById('portGrid'),e=document.getElementById('portEmpty');if(g&&e&&g.querySelectorAll('.port-card').length>0)e.style.display='none';})();
 
 /* PAGE SWITCH */
 const lp=document.getElementById('lp'),hp=document.getElementById('hp');
@@ -1691,8 +1835,6 @@ document.querySelectorAll('a[target="_blank"]').forEach(a=>{
       },
       modes:{
         grab:{distance:140,line_linked:{opacity:1}},
-        bubble:{distance:400,size:40,duration:2,opacity:8,speed:3},
-        repulse:{distance:200,duration:0.4},
         push:{particles_nb:4},
         remove:{particles_nb:2}
       }
