@@ -112,7 +112,8 @@
     }
     .pre.gone{opacity:0;visibility:hidden}
     .pre-logo{
-      width:200px;height:200px;
+      width:clamp(220px,50vw,520px);
+      height:auto;
       filter:drop-shadow(0 0 40px rgba(232,132,74,.5)) drop-shadow(0 0 80px rgba(232,132,74,.2));
       animation:preLogoIn 1s cubic-bezier(.34,1.56,.64,1) forwards;
       opacity:0;transform:scale(.5);
@@ -143,7 +144,7 @@
       text-align:center;padding:2rem;
     }
     .lp-logo{
-      width:130px;
+      width:clamp(160px,28vw,320px);
       height:auto;
       filter:drop-shadow(0 10px 10px rgba(0,0,0,0.3));
       animation:logoFloat 3s ease-in-out infinite;
@@ -220,7 +221,8 @@
       color:var(--amber);letter-spacing:.08em;text-transform:uppercase;
     }
     .nav-logo{
-      width:52px;height:52px;
+      width:clamp(56px,8vw,120px);
+      height:auto;
       filter:drop-shadow(0 0 10px rgba(232,132,74,.5));
       transition:filter .3s;flex-shrink:0;
     }
@@ -773,7 +775,7 @@
 <!-- ═══════════ LANDING ═══════════ -->
 <div id="lp">
   <button class="ctrl-btn" id="themeBtn" aria-label="Toggle theme" style="position:absolute;top:1rem;right:1rem;z-index:500"><i class="fas fa-moon"></i></button>
-  <img src="sapphire-logo.png" alt="Sapphire" class="lp-logo" width="120" height="120">
+  <img src="sapphire-logo.png" alt="Sapphire" class="lp-logo">
   <div class="lp-eye">Est. 2024 · CS&#8209;AIML Department · Hyderabad</div>
   <h1 class="lp-h1">We are<br><span>Sapphire</span></h1>
   <p class="lp-sub">A movement of innovators, learners, and creators.<br>Built from spark, strengthened by will.</p>
@@ -1469,7 +1471,7 @@
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* STARFIELD */
 (()=>{
   const c=document.getElementById('sf'),x=c.getContext('2d');
@@ -1830,18 +1832,14 @@ document.querySelectorAll('a[target="_blank"]').forEach(a=>{
       detect_on:"canvas",
       events:{
         onhover:{enable:true,mode:"grab"},
-        onclick:{enable:true,mode:"push"},
-        resize:true
+        onclick:{enable:true,mode:"push"}
       },
       modes:{
-        grab:{distance:140,line_linked:{opacity:1}},
-        push:{particles_nb:4},
-        remove:{particles_nb:2}
+        grab:{distance:200,duration:.4},
+        push:{quantity:4}
       }
     },
     retina_detect:true
   });
 })();
 </script>
-</body>
-</html>
