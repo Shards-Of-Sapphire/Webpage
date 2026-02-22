@@ -95,7 +95,6 @@
     .prog-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--amber2),var(--amber),var(--gold));transition:width .1s linear}
 
     /* theme toggle */
-    .ctrl{position:fixed;top:1rem;right:1rem;z-index:500}
     .ctrl-btn{
       width:40px;height:40px;border-radius:50%;
       background:var(--bg2);border:1px solid var(--border);
@@ -103,6 +102,7 @@
       font-size:.9rem;transition:all .3s;backdrop-filter:blur(10px);
     }
     .ctrl-btn:hover{transform:scale(1.1);border-color:var(--amber)}
+    .nav-ctrl{margin-left:.5rem;flex-shrink:0}
 
     /* preloader */
     .pre{
@@ -704,10 +704,10 @@
 </div>
 
 <div class="prog-rail"><div class="prog-bar" id="pb"></div></div>
-<div class="ctrl"><button class="ctrl-btn" id="themeBtn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button></div>
 
 <!-- ═══════════ LANDING ═══════════ -->
 <div id="lp">
+  <button class="ctrl-btn" id="themeBtn" aria-label="Toggle theme" style="position:absolute;top:1rem;right:1rem;z-index:500"><i class="fas fa-moon"></i></button>
   <img src="sapphire-logo.png" alt="Sapphire" class="lp-logo" width="120" height="120">
   <div class="lp-eye">Est. 2024 · CS&#8209;AIML Department · Hyderabad</div>
   <h1 class="lp-h1">We are<br><span>Sapphire</span></h1>
@@ -736,6 +736,7 @@
       <li><a href="javascript:void(0)" data-page="projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <button class="ctrl-btn nav-ctrl" id="themeBtnNav" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
   </nav>
 
   <!-- Hero band -->
@@ -1380,25 +1381,72 @@ const lp=document.getElementById('lp'),hp=document.getElementById('hp');
 function goHome(){lp.style.display='none';hp.style.display='block';localStorage.setItem('p','h');scrollTo(0,0);initReveal();initCount()}
 function goLand(){hp.style.display='none';lp.style.display='flex';localStorage.setItem('p','l');scrollTo(0,0)}
 if(localStorage.getItem('p')=='h')goHome();
-document.getElementById('beginJourney').addEventListener('click',goHome);
-document.getElementById('returnLanding').addEventListener('click',e=>{e.preventDefault();goLand()});
+document.getElementById('beginJourney').addEventListener('click',()=>{sfxCTA();goHome();});
+document.getElementById('returnLanding').addEventListener('click',e=>{e.preventDefault();sfxPageClose();goLand();});
 
 /* PROGRESS */
 const pb=document.getElementById('pb');
 addEventListener('scroll',()=>{const s=document.documentElement;pb.style.width=((s.scrollTop/(s.scrollHeight-s.clientHeight))*100)+'%'});
 
+/* ── SOUND ENGINE ── */
+const _ac=new(window.AudioContext||window.webkitAudioContext)();
+function _resumeAC(){if(_ac.state==='suspended')_ac.resume();}
+function sfxTone(freq1,freq2,dur,vol,type='sine'){
+  _resumeAC();
+  const o=_ac.createOscillator(),g=_ac.createGain();
+  o.type=type;o.connect(g);g.connect(_ac.destination);
+  o.frequency.setValueAtTime(freq1,_ac.currentTime);
+  o.frequency.exponentialRampToValueAtTime(freq2,_ac.currentTime+dur);
+  g.gain.setValueAtTime(vol,_ac.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.0001,_ac.currentTime+dur);
+  o.start();o.stop(_ac.currentTime+dur+0.01);
+}
+function sfxNoise(dur,vol,hipass){
+  _resumeAC();
+  const buf=_ac.createBuffer(1,_ac.sampleRate*dur,_ac.sampleRate);
+  const d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
+  const src=_ac.createBufferSource(),g=_ac.createGain(),f=_ac.createBiquadFilter();
+  f.type='highpass';f.frequency.value=hipass;
+  src.buffer=buf;src.connect(f);f.connect(g);g.connect(_ac.destination);
+  g.gain.setValueAtTime(vol,_ac.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.0001,_ac.currentTime+dur);
+  src.start();src.stop(_ac.currentTime+dur);
+}
+function sfxTick(){sfxTone(900,600,0.06,0.07);}
+function sfxPageOpen(){sfxTone(300,900,0.12,0.10);setTimeout(()=>sfxTone(900,1200,0.08,0.06),80);}
+function sfxPageClose(){sfxTone(800,280,0.13,0.09);}
+function sfxCTA(){sfxTone(440,880,0.1,0.13,'triangle');setTimeout(()=>sfxTone(880,1320,0.1,0.07),90);}
+function sfxPop(){sfxTone(600,1000,0.07,0.09);sfxTone(1000,700,0.07,0.04);}
+function sfxSuccess(){[0,100,200].forEach((d,i)=>setTimeout(()=>sfxTone([523,659,784][i],[659,784,1047][i],0.15,0.09),d));}
+function sfxError(){sfxTone(220,180,0.18,0.12,'sawtooth');}
+function playClick(toLight){
+  if(toLight){sfxTone(600,1400,0.09,0.13);setTimeout(()=>sfxTone(1400,1800,0.06,0.06),70);}
+  else{sfxTone(900,300,0.1,0.12);setTimeout(()=>sfxNoise(0.06,0.04,800),40);}
+}
+function sfxNavToggle(){sfxNoise(0.05,0.06,1200);}
+function sfxFocus(){sfxTone(700,900,0.05,0.04);}
+
 /* THEME */
 const tb=document.getElementById('themeBtn');
-if(localStorage.getItem('th')=='l'){document.body.classList.add('light');tb.innerHTML='<i class="fas fa-sun"></i>'}
-tb.addEventListener('click',()=>{
+const tbn=document.getElementById('themeBtnNav');
+function syncThemeBtns(isLight){
+  const icon=isLight?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
+  if(tb)tb.innerHTML=icon;
+  if(tbn)tbn.innerHTML=icon;
+}
+function toggleTheme(){
   document.body.classList.toggle('light');
   const l=document.body.classList.contains('light');
-  tb.innerHTML=l?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
+  syncThemeBtns(l);
   localStorage.setItem('th',l?'l':'d');
-});
+  playClick(l);
+}
+if(localStorage.getItem('th')=='l'){document.body.classList.add('light');syncThemeBtns(true);}
+if(tb)tb.addEventListener('click',toggleTheme);
+if(tbn)tbn.addEventListener('click',toggleTheme);
 
 /* MOBILE NAV */
-document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('navUl').classList.toggle('open'));
+document.getElementById('navToggle').addEventListener('click',()=>{sfxNavToggle();document.getElementById('navUl').classList.toggle('open');});
 document.querySelectorAll('.nav-ul a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navUl').classList.remove('open')));
 
 /* REVEAL */
@@ -1441,13 +1489,14 @@ function closePage(name){
 document.querySelectorAll('.nav-ul a[data-page]').forEach(a=>{
   a.addEventListener('click',e=>{
     e.preventDefault();
+    sfxPageOpen();
     openPage(a.getAttribute('data-page'));
   });
 });
 
 // footer links to pages
 document.querySelectorAll('.foot-links a[data-page]').forEach(a=>{
-  a.addEventListener('click',e=>{e.preventDefault();openPage(a.getAttribute('data-page'))});
+  a.addEventListener('click',e=>{e.preventDefault();sfxPageOpen();openPage(a.getAttribute('data-page'))});
 });
 
 /* CARD TILT EFFECT */
@@ -1483,7 +1532,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 /* BACK TO TOP */
 const btt=document.getElementById('btt');
 addEventListener('scroll',()=>btt.classList.toggle('on',scrollY>450));
-btt.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+btt.addEventListener('click',()=>{sfxPop();scrollTo({top:0,behavior:'smooth'});});
 
 /* CONTACT FORM — Web3Forms submission → shardsofsapphire.org@gmail.com */
 document.getElementById('cForm').addEventListener('submit',async function(e){
@@ -1519,20 +1568,44 @@ document.getElementById('cForm').addEventListener('submit',async function(e){
     });
     const data=await res.json();
     if(data.success){
+      sfxSuccess();
       msgEl.className='ok';
       msgEl.textContent='Message sent! We will get back to you soon. ✔️';
       this.reset();
     } else {
+      sfxError();
       msgEl.className='err';
       msgEl.textContent=data.message||'Submission failed. Please try again.';
     }
   } catch(err){
+    sfxError();
     msgEl.className='err';
     msgEl.textContent='Network error. Please try again.';
   }
   btn.innerHTML='Send Message <i class="fas fa-paper-plane"></i>';
   btn.disabled=false;
   msgEl.style.display='block';
+});
+
+
+/* SFX — nav links tick */
+document.querySelectorAll('.nav-ul a, .lp-socials a, .foot-links a, .foot-social a').forEach(a=>{
+  if(!a.hasAttribute('data-page'))a.addEventListener('click',sfxTick);
+});
+
+/* SFX — close-page buttons */
+document.querySelectorAll('.page-back').forEach(btn=>{
+  btn.addEventListener('click',sfxPageClose);
+});
+
+/* SFX — form inputs focus */
+document.querySelectorAll('#cForm input, #cForm textarea').forEach(el=>{
+  el.addEventListener('focus',sfxFocus);
+});
+
+/* SFX — social/external links */
+document.querySelectorAll('a[target="_blank"]').forEach(a=>{
+  a.addEventListener('click',sfxTick);
 });
 
 </script>
