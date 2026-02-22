@@ -1327,7 +1327,7 @@
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 /* STARFIELD */
 (()=>{
   const c=document.getElementById('sf'),x=c.getContext('2d');
@@ -1691,5 +1691,15 @@ document.querySelectorAll('a[target="_blank"]').forEach(a=>{
       },
       modes:{
         grab:{distance:140,line_linked:{opacity:1}},
+        bubble:{distance:400,size:40,duration:2,opacity:8,speed:3},
+        repulse:{distance:200,duration:0.4},
         push:{particles_nb:4},
-        remov
+        remove:{particles_nb:2}
+      }
+    },
+    retina_detect:true
+  });
+})();
+</script>
+</body>
+</html>
