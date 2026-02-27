@@ -15,7 +15,7 @@
   <meta name="description" content="Sapphire is a movement of innovators, learners, and creators from CS-AIML. We build web apps, AI projects, and handle digital presence. Based in Hyderabad.">
   <meta name="robots" content="index, follow">
   <meta name="keywords" content="Sapphire, web development, web applications, social media management, AI projects, LegalEase, tech community, Hyderabad, CS-AIML">
-  <link rel="canonical" href="https://shards-of-sapphire.github.io/Webpage/">
+  <link rel="canonical" href="https://shards-of-sapphire.github.io/">
   <meta property="og:title" content="Sapphire — Innovators, Learners &amp; Creators">
   <meta property="og:description" content="We build websites, web apps, AI tools, and manage digital presence. A movement built from spark, strengthened by will.">
   <meta property="og:image" content="https://shards-of-sapphire.github.io/sapphire-logo.png">
@@ -27,17 +27,8 @@
   <meta name="twitter:description" content="We build websites, web apps, AI tools, and manage digital presence.">
   <meta name="twitter:image" content="https://shards-of-sapphire.github.io/sapphire-logo.png">
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Organization","name":"Sapphire","url":"https://shards-of-sapphire.github.io/","logo":"https://shards-of-sapphire.github.io/sapphire-logo.png","description":"A movement of innovators, learners, and creators from CS-AIML department. We build websites, web apps, and AI-powered tools.","sameAs":["https://github.com/Shards-Of-Sapphire","http://www.youtube.com/@shards-of-sapphire","https://www.instagram.com/sapphire.official.ig/","https://www.linkedin.com/in/sapphire-team-b1b2b5360"]}
+  {"@context":"https://schema.org","@type":"Organization","name":"Sapphire","url":"https://shards-of-sapphire.github.io/","logo":"https://shards-of-sapphire.github.io/sapphire-logo.png","description":"A movement of innovators, learners, and creators from CS-AIML department. We build websites, web apps, and AI-powered tools.","sameAs":["https://github.com/Shards-Of-Sapphire","http://www.youtube.com/@shards-of-sapphire","https://www.instagram.com/sapphire.official.ig/","https://www.linkedin.com/in/sapphire-team-b1b2b5360","https://www.freelancer.in/u/shardsofsapphire","https://www.facebook.com/share/1PfBHp17Mk/"]}
   </script>
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Sapphire",
-  "alternateName": "Shards of Sapphire",
-  "url": "https://shards-of-sapphire.github.io/Webpage/"
-}
-</script>
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
   <link rel="icon" type="image/png" href="sapphire-icon.png" sizes="64x64">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -794,6 +785,8 @@
     <a href="http://www.youtube.com/@shards-of-sapphire" target="_blank" rel="noopener noreferrer">YouTube</a>
     <a href="https://www.instagram.com/sapphire.official.ig/" target="_blank" rel="noopener noreferrer">Instagram</a>
     <a href="https://www.linkedin.com/in/sapphire-team-b1b2b5360" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://www.freelancer.in/u/shardsofsapphire" target="_blank" rel="noopener noreferrer">Freelancer</a>
+    <a href="https://www.facebook.com/share/1PfBHp17Mk/" target="_blank" rel="noopener noreferrer">Facebook</a>
   </nav>
   <div class="lp-line"></div>
 </div>
@@ -998,6 +991,8 @@
           <a href="http://www.youtube.com/@shards-of-sapphire" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
           <a href="https://www.instagram.com/sapphire.official.ig/" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
           <a href="https://www.linkedin.com/in/sapphire-team-b1b2b5360" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.freelancer.in/u/shardsofsapphire" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Freelancer"><i class="fas fa-briefcase"></i></a>
+          <a href="https://www.facebook.com/share/1PfBHp17Mk/" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
         </div>
       </div>
       <div class="ct-form-wrap rv d2">
@@ -1480,7 +1475,7 @@
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 /* STARFIELD */
 (()=>{
   const c=document.getElementById('sf'),x=c.getContext('2d');
@@ -1537,106 +1532,14 @@ const lp=document.getElementById('lp'),hp=document.getElementById('hp');
 function goHome(){lp.style.display='none';hp.style.display='block';localStorage.setItem('p','h');scrollTo(0,0);initReveal();initCount()}
 function goLand(){hp.style.display='none';lp.style.display='flex';localStorage.setItem('p','l');scrollTo(0,0)}
 if(localStorage.getItem('p')=='h')goHome();
-document.getElementById('beginJourney').addEventListener('click',()=>{sfxCTA();goHome();});
-document.getElementById('returnLanding').addEventListener('click',e=>{e.preventDefault();sfxPageClose();goLand();});
+document.getElementById('beginJourney').addEventListener('click',()=>{goHome();});
+document.getElementById('returnLanding').addEventListener('click',e=>{e.preventDefault();goLand();});
 
 /* PROGRESS */
 const pb=document.getElementById('pb');
 addEventListener('scroll',()=>{const s=document.documentElement;pb.style.width=((s.scrollTop/(s.scrollHeight-s.clientHeight))*100)+'%'});
 
-/* ── SOUND ENGINE ── */
-let _ac=null,_master=null;
-function _resumeAC(){
-  if(!_ac){
-    _ac=new(window.AudioContext||window.webkitAudioContext)();
-    /* hard limiter so we never clip */
-    const lim=_ac.createDynamicsCompressor();
-    lim.threshold.value=-1;lim.knee.value=0;
-    lim.ratio.value=20;lim.attack.value=0.001;lim.release.value=0.05;
-    /* master boost */
-    _master=_ac.createGain();
-    _master.gain.value=8;
-    _master.connect(lim);lim.connect(_ac.destination);
-  }
-  if(_ac.state==='suspended')_ac.resume();
-}
-/* layered tone: fundamental + octave harmonic for body */
-function sfxTone(freq1,freq2,dur,vol,type='sine'){
-  _resumeAC();
-  const t=_ac.currentTime;
-  [1,0.5].forEach((mult,i)=>{
-    const o=_ac.createOscillator(),g=_ac.createGain();
-    o.type=i===0?type:'triangle';
-    o.connect(g);g.connect(_master);
-    o.frequency.setValueAtTime(freq1*mult,t);
-    o.frequency.exponentialRampToValueAtTime(freq2*mult,t+dur);
-    const v=vol*(i===0?1:0.4);
-    g.gain.setValueAtTime(v,t);
-    g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
-    o.start();o.stop(t+dur+0.02);
-  });
-}
-/* fat noise burst */
-function sfxNoise(dur,vol,hipass){
-  _resumeAC();
-  const buf=_ac.createBuffer(1,_ac.sampleRate*dur,_ac.sampleRate);
-  const d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
-  const src=_ac.createBufferSource(),g=_ac.createGain(),f=_ac.createBiquadFilter();
-  f.type='highpass';f.frequency.value=hipass;
-  src.buffer=buf;src.connect(f);f.connect(g);g.connect(_master);
-  g.gain.setValueAtTime(vol,_ac.currentTime);
-  g.gain.exponentialRampToValueAtTime(0.0001,_ac.currentTime+dur);
-  src.start();src.stop(_ac.currentTime+dur);
-}
-/* PUNCHY tick — double click feel */
-function sfxTick(){
-  sfxTone(1100,600,0.08,0.9);
-  sfxNoise(0.04,0.3,2000);
-}
-/* PAGE OPEN — big whoosh sweep */
-function sfxPageOpen(){
-  sfxNoise(0.12,0.5,400);
-  sfxTone(200,1200,0.22,0.9);
-  setTimeout(()=>sfxTone(1200,1600,0.1,0.6),120);
-}
-/* PAGE CLOSE — downward slam */
-function sfxPageClose(){
-  sfxTone(900,120,0.2,0.9,'sawtooth');
-  sfxNoise(0.08,0.4,600);
-}
-/* CTA — fanfare */
-function sfxCTA(){
-  sfxTone(440,880,0.15,0.9,'triangle');
-  setTimeout(()=>sfxTone(880,1320,0.15,0.7,'triangle'),90);
-  setTimeout(()=>sfxTone(1320,1760,0.12,0.5,'triangle'),180);
-}
-/* POP — satisfying thud */
-function sfxPop(){
-  sfxTone(180,60,0.15,1.0,'sine');
-  sfxTone(900,300,0.1,0.6);
-  sfxNoise(0.05,0.35,1500);
-}
-/* SUCCESS — triumphant 3-note chord */
-function sfxSuccess(){
-  [[523,659],[659,784],[784,1047],[1047,1400]].forEach(([f1,f2],i)=>{
-    setTimeout(()=>{sfxTone(f1,f2,0.22,0.8,'triangle');sfxTone(f1*0.5,f2*0.5,0.22,0.5);},i*90);
-  });
-}
-/* ERROR — harsh buzz */
-function sfxError(){
-  sfxTone(260,180,0.3,0.9,'sawtooth');
-  sfxTone(130,90,0.3,0.5,'square');
-  sfxNoise(0.15,0.35,200);
-}
-/* THEME TOGGLE */
-function playClick(toLight){
-  if(toLight){sfxTone(500,1600,0.15,0.9);setTimeout(()=>sfxTone(1600,2400,0.1,0.6),80);sfxNoise(0.06,0.3,3000);}
-  else{sfxTone(1200,200,0.18,0.9,'sawtooth');setTimeout(()=>sfxNoise(0.1,0.5,500),30);}
-}
-/* NAV TOGGLE — snappy crack */
-function sfxNavToggle(){sfxNoise(0.07,0.8,1500);sfxTone(400,600,0.06,0.5);}
-/* FOCUS — gentle chime */
-function sfxFocus(){sfxTone(800,1100,0.1,0.6);}
+
 
 /* THEME */
 const tb=document.getElementById('themeBtn');
@@ -1651,14 +1554,13 @@ function toggleTheme(){
   const l=document.body.classList.contains('light');
   syncThemeBtns(l);
   localStorage.setItem('th',l?'l':'d');
-  playClick(l);
 }
 if(localStorage.getItem('th')=='l'){document.body.classList.add('light');syncThemeBtns(true);}
 if(tb)tb.addEventListener('click',toggleTheme);
 if(tbn)tbn.addEventListener('click',toggleTheme);
 
 /* MOBILE NAV */
-document.getElementById('navToggle').addEventListener('click',()=>{sfxNavToggle();document.getElementById('navUl').classList.toggle('open');});
+document.getElementById('navToggle').addEventListener('click',()=>{document.getElementById('navUl').classList.toggle('open');});
 document.querySelectorAll('.nav-ul a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navUl').classList.remove('open')));
 
 /* REVEAL */
@@ -1701,14 +1603,13 @@ function closePage(name){
 document.querySelectorAll('.nav-ul a[data-page]').forEach(a=>{
   a.addEventListener('click',e=>{
     e.preventDefault();
-    sfxPageOpen();
     openPage(a.getAttribute('data-page'));
   });
 });
 
 // footer links to pages
 document.querySelectorAll('.foot-links a[data-page]').forEach(a=>{
-  a.addEventListener('click',e=>{e.preventDefault();sfxPageOpen();openPage(a.getAttribute('data-page'))});
+  a.addEventListener('click',e=>{e.preventDefault();openPage(a.getAttribute('data-page'))});
 });
 
 /* CARD TILT EFFECT */
@@ -1744,7 +1645,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 /* BACK TO TOP */
 const btt=document.getElementById('btt');
 addEventListener('scroll',()=>btt.classList.toggle('on',scrollY>450));
-btt.addEventListener('click',()=>{sfxPop();scrollTo({top:0,behavior:'smooth'});});
+btt.addEventListener('click',()=>{scrollTo({top:0,behavior:'smooth'});});
 
 /* CONTACT FORM — Web3Forms submission → shardsofsapphire.org@gmail.com */
 document.getElementById('cForm').addEventListener('submit',async function(e){
@@ -1780,17 +1681,14 @@ document.getElementById('cForm').addEventListener('submit',async function(e){
     });
     const data=await res.json();
     if(data.success){
-      sfxSuccess();
       msgEl.className='ok';
       msgEl.textContent='Message sent! We will get back to you soon. ✔️';
       this.reset();
     } else {
-      sfxError();
       msgEl.className='err';
       msgEl.textContent=data.message||'Submission failed. Please try again.';
     }
   } catch(err){
-    sfxError();
     msgEl.className='err';
     msgEl.textContent='Network error. Please try again.';
   }
@@ -1800,25 +1698,6 @@ document.getElementById('cForm').addEventListener('submit',async function(e){
 });
 
 
-/* SFX — nav links tick */
-document.querySelectorAll('.nav-ul a, .lp-socials a, .foot-links a, .foot-social a').forEach(a=>{
-  if(!a.hasAttribute('data-page'))a.addEventListener('click',sfxTick);
-});
-
-/* SFX — close-page buttons */
-document.querySelectorAll('.page-back').forEach(btn=>{
-  btn.addEventListener('click',sfxPageClose);
-});
-
-/* SFX — form inputs focus */
-document.querySelectorAll('#cForm input, #cForm textarea').forEach(el=>{
-  el.addEventListener('focus',sfxFocus);
-});
-
-/* SFX — social/external links */
-document.querySelectorAll('a[target="_blank"]').forEach(a=>{
-  a.addEventListener('click',sfxTick);
-});
 
 </script>
 
@@ -1833,22 +1712,4 @@ document.querySelectorAll('a[target="_blank"]').forEach(a=>{
       color:{value:"#FF914D"},
       shape:{type:"circle"},
       opacity:{value:0.5,random:true,anim:{enable:true,speed:1,opacity_min:0.1,sync:false}},
-      size:{value:3,random:true,anim:{enable:true,speed:2,size_min:0.1,sync:false}},
-      line_linked:{enable:true,distance:150,color:"#4B5D9B",opacity:0.4,width:1},
-      move:{enable:true,speed:2,direction:"none",random:true,straight:false,out_mode:"out",bounce:false}
-    },
-    interactivity:{
-      detect_on:"canvas",
-      events:{
-        onhover:{enable:true,mode:"grab"},
-        onclick:{enable:true,mode:"push"}
-      },
-      modes:{
-        grab:{distance:200,duration:.4},
-        push:{quantity:4}
-      }
-    },
-    retina_detect:true
-  });
-})();
-</script>
+      size:{value:3,random:true,anim:{enable
