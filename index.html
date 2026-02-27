@@ -1475,7 +1475,7 @@
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* STARFIELD */
 (()=>{
   const c=document.getElementById('sf'),x=c.getContext('2d');
@@ -1708,8 +1708,22 @@ document.getElementById('cForm').addEventListener('submit',async function(e){
   if(typeof tsParticles==='undefined')return;
   await tsParticles.load("particles-js",{
     particles:{
-      number:{value:80,density:{enable:true,value_area:800}},
-      color:{value:"#FF914D"},
-      shape:{type:"circle"},
-      opacity:{value:0.5,random:true,anim:{enable:true,speed:1,opacity_min:0.1,sync:false}},
-      size:{value:3,random:true,anim:{enable
+      number:{value:90,density:{enable:true,area:900}},
+      color:{value:["#E8844A","#d4a853","#3355cc","#9aa5be","#c9652a"]},
+      shape:{type:["circle","triangle"]},
+      opacity:{value:0.45,random:true,animation:{enable:true,speed:0.6,minimumValue:0.1,sync:false}},
+      size:{value:{min:1,max:3.5},random:true,animation:{enable:true,speed:1.5,minimumValue:0.3,sync:false}},
+      links:{enable:true,distance:130,color:"#3355cc",opacity:0.12,width:1},
+      move:{enable:true,speed:0.6,direction:"none",random:true,straight:false,outModes:{default:"out"},attract:{enable:false}},
+      twinkle:{particles:{enable:true,frequency:0.05,opacity:1}}
+    },
+    interactivity:{
+      detectsOn:"window",
+      events:{onHover:{enable:true,mode:"grab"},onClick:{enable:true,mode:"push"},resize:true},
+      modes:{grab:{distance:160,links:{opacity:0.35,color:"#E8844A"}},push:{quantity:3}}
+    },
+    background:{color:"transparent"},
+    detectRetina:true
+  });
+})();
+</script>
