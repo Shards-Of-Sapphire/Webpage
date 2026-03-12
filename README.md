@@ -42,12 +42,9 @@ Ensure your EmailJS template matches these variable names.
 
 ---
 
-## 🛠️ Deployment Options
+## 🛠️ Deployment
 
-- **GitHub Pages** (static hosting)
-- **Netlify** (drag-and-drop, supports instant deployment)
-- **InfinityFree / 000webhost** (for PHP email forms, if used instead)
-
+- **GitHub Pages**
 ---
 
 ## 📄 License
