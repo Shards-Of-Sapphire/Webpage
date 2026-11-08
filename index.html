@@ -261,6 +261,20 @@
       font-size:clamp(1.9rem,4.5vw,3rem);font-weight:900;line-height:1.1;
     }
     .sh-sub{color:var(--soft);max-width:520px;margin:.9rem auto 0;font-size:1rem;font-style:italic}
+    .blog-preview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem}
+    .blog-card{
+      display:flex;flex-direction:column;min-height:220px;padding:1.5rem;
+      background:linear-gradient(145deg,var(--bg2),var(--bg3));
+      border:1px solid var(--border);border-radius:var(--r);transition:transform .3s,border-color .3s;
+    }
+    .blog-card:hover{transform:translateY(-5px);border-color:var(--amber)}
+    .blog-card-meta{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.08em;color:var(--gold);margin-bottom:.75rem}
+    .blog-card h2{font-family:'Playfair Display',Georgia,serif;font-size:1.3rem;line-height:1.3;margin-bottom:.65rem}
+    .blog-card p{color:var(--soft);font-size:.92rem;line-height:1.65}
+    .blog-card-link{color:var(--amber);font-family:'DM Mono',monospace;font-size:.78rem;margin-top:auto;padding-top:1rem}
+    .blog-status{color:var(--soft);text-align:center}
+    .blog-all-link{display:block;width:max-content;margin:2rem auto 0;color:var(--amber);font-family:'DM Mono',monospace;font-size:.82rem}
+    .blog-all-link:hover{color:var(--gold)}
 
     /* reveal */
     .rv{opacity:0;transform:translateY(36px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
@@ -807,6 +821,7 @@
       <li><a href="javascript:void(0)" data-page="services">Services</a></li>
       <li><a href="javascript:void(0)" data-page="projects">Projects</a></li>
       <li><a href="javascript:void(0)" data-page="portfolio">Portfolio</a></li>
+      <li><a href="blog/">Blog</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="ctrl-btn nav-ctrl" id="themeBtnNav" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
@@ -968,6 +983,21 @@
  
   <div class="divr"></div>
 
+  <!-- BLOG -->
+  <section id="blog" class="sec" aria-labelledby="blog-h">
+    <div class="sh rv">
+      <span class="sh-eye">Notes from Sapphire</span>
+      <h2 class="sh-title" id="blog-h">Latest <em>Stories</em></h2>
+      <p class="sh-sub">Ideas, lessons, and updates from our team.</p>
+    </div>
+    <div class="blog-preview-grid" id="latestBlogPosts" aria-live="polite">
+      <p class="blog-status">Loading latest posts...</p>
+    </div>
+    <a class="blog-all-link" href="blog/">Explore all blogs <i class="fas fa-arrow-right"></i></a>
+  </section>
+
+  <div class="divr"></div>
+
   <!-- CONTACT -->
   <section id="contact" class="sec" aria-labelledby="ct-h">
     <div class="sh rv">
@@ -1066,6 +1096,7 @@
       <a href="javascript:void(0)" data-page="services">Services</a>
       <a href="javascript:void(0)" data-page="projects">Projects</a>
       <a href="javascript:void(0)" data-page="portfolio">Portfolio</a>
+      <a href="blog/">Blog</a>
       <a href="#contact">Contact</a>
     </nav>
     <nav class="foot-links" aria-label="Legal navigation" style="margin-top:0.5rem;font-size:0.85rem">
@@ -1918,5 +1949,6 @@ document.getElementById('cForm').addEventListener('submit',async function(e){
   });
 })();
 </script>
+<script src="blog/blog.js" defer></script>
 </body>
 </html>
