@@ -6,6 +6,7 @@
   const listing = document.getElementById('blog-listing');
   const article = document.getElementById('blog-article');
   const articleSlug = new URLSearchParams(window.location.search).get('post');
+  const manifestUrl = new URL(container.dataset.source || 'blogs/index.json', document.baseURI);
 
   function showMessage(message) {
     const status = document.createElement('p');
@@ -23,8 +24,8 @@
   function safeImageUrl(value) {
     if (typeof value !== 'string' || !value.trim()) return '';
     try {
-      const url = new URL(value, document.baseURI);
-      return url.protocol === 'https:' ? url.href : '';
+      const url = new URL(value, manifestUrl);
+      return url.protocol === 'https:' && url.origin === window.location.origin ? url.href : '';
     } catch {
       return '';
     }
@@ -76,7 +77,7 @@
     return card;
   }
 
-  function showArticle(posts, slug) {
+  async function showArticle(posts, slug) {
     const post = posts.find(item => item.slug === slug);
     if (!post || !article || !listing) {
       showMessage('That post could not be found. Browse all stories instead.');
@@ -103,18 +104,22 @@
       image.removeAttribute('src');
     }
 
-    if (!window.marked || !window.DOMPurify) {
-      body.textContent = 'The article could not be rendered because the content renderer did not load. Please try again later.';
-    } else {
-      body.innerHTML = window.DOMPurify.sanitize(window.marked.parse(post.body || ''), { USE_PROFILES: { html: true } });
-    }
-
     document.title = `${post.title || 'Blog'} | Sapphire`;
     listing.hidden = true;
     article.hidden = false;
+    body.textContent = 'Loading article...';
+
+    if (!window.marked || !window.DOMPurify) {
+      throw new Error('The Markdown renderer did not load.');
+    }
+
+    const response = await fetch(new URL(`posts/${post.slug}.md`, manifestUrl));
+    if (!response.ok) throw new Error(`Article request failed with status ${response.status}.`);
+    const markdown = await response.text();
+    body.innerHTML = window.DOMPurify.sanitize(window.marked.parse(markdown), { USE_PROFILES: { html: true } });
   }
 
-  fetch(container.dataset.source || 'content/blog.json')
+  fetch(manifestUrl)
     .then(response => {
       if (!response.ok) throw new Error(`Blog data request failed with status ${response.status}.`);
       return response.json();
@@ -122,8 +127,7 @@
     .then(data => {
       const posts = publishedPosts(data);
       if (articleSlug && isListingPage) {
-        showArticle(posts, articleSlug);
-        return;
+        return showArticle(posts, articleSlug);
       }
 
       const visiblePosts = isListingPage ? posts : posts.slice(0, 3);
@@ -136,6 +140,10 @@
     })
     .catch(error => {
       console.error('Unable to load Sapphire blog posts:', error);
-      showMessage('Blog posts could not be loaded right now. Please try again later.');
+      if (articleSlug && article && !article.hidden) {
+        document.getElementById('article-body').textContent = 'This article could not be loaded right now. Please try again later.';
+      } else {
+        showMessage('Blog posts could not be loaded right now. Please try again later.');
+      }
     });
 })();

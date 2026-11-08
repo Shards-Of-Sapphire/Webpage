@@ -32,18 +32,24 @@
 ## ✍️ Blog and publishing
 
 - Visit [`/blog/`](https://shards-of-sapphire.github.io/Webpage/blog/) to browse published posts.
-- Visit [`/admin/`](https://shards-of-sapphire.github.io/Webpage/admin/) to write and publish posts with Decap CMS.
-- Blog content is stored in `content/blog.json`; only posts with **Published** enabled appear on the site.
-- The CMS uses the GitHub backend for `Shards-Of-Sapphire/Webpage` on the `main` branch. Editors need GitHub write access to that repository.
+- To publish, add the article as Markdown under `blogs/posts/` and add its details to `blogs/index.json`. Push both files to the `main` branch; there is no CMS login or separate authentication service.
+- Set `"published": true` in the index entry to show the post. Drafts marked `false` stay hidden.
 
-### One-time CMS authentication setup
+Each index entry has this shape:
 
-GitHub Pages is static and cannot safely hold GitHub OAuth credentials. Before editors can sign in to `/admin/`, configure an OAuth provider:
+```json
+{
+  "slug": "your-post-title",
+  "title": "Your post title",
+  "date": "2026-11-08",
+  "author": "Your name",
+  "summary": "A short preview shown on the homepage and blog list.",
+  "image": "images/your-cover.jpg",
+  "published": true
+}
+```
 
-1. Create a GitHub OAuth App. Set its authorization callback URL to `https://api.netlify.com/auth/done`.
-2. In Netlify, configure the GitHub OAuth provider for a site and enter the OAuth App's client ID and secret. The website can continue to be hosted on GitHub Pages; Netlify is used only for the CMS authentication service.
-3. Keep the OAuth client secret in Netlify's provider settings. Never put it in this repository or in the browser.
-4. Sign in at `/admin/` with a GitHub account that has write access to the repository.
+Save the article body at `blogs/posts/your-post-title.md`, matching the `slug`. The `image` field is optional; when used, add the image inside `blogs/` and use a path relative to `blogs/index.json`.
 
 ---
 
